@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-       android:id="@+id/image"
+        android:id="@+id/image"
         android:layout_width="412dp"
         android:layout_height="485dp"
         android:src="@drawable/interior"
@@ -17,16 +17,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.016">
+        app:layout_constraintVertical_bias="0.0">
 
     </ImageView>
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="411dp"
-        android:layout_height="339dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:paddingLeft="40dp"
-        android:paddingTop="100dp"
+        android:paddingTop="275dp"
         android:text="MarkUp"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
         android:textColor="#FFF"
