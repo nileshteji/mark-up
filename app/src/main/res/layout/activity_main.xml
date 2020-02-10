@@ -37,7 +37,7 @@
         tools:layout_editor_absoluteX="0dp"></TextView>
 
     <Button
-        android:id="@+id/Sign"
+        android:id="@+id/Register"
         android:layout_width="157dp"
         android:layout_height="60dp"
         android:layout_marginEnd="32dp"
@@ -60,7 +60,7 @@
         android:textColor="#FFF"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Sign"
+        app:layout_constraintEnd_toStartOf="@+id/Register"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

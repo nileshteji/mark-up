@@ -8,12 +8,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +24,7 @@ ConstraintLayout layout;
         setContentView(R.layout.activity_main);
         login=findViewById(R.id.login);
         markup=findViewById(R.id.textView);
-        signUp=findViewById(R.id.Sign);
+        signUp=findViewById(R.id.Register);
         layout=findViewById(R.id.layout);
         interior=findViewById(R.id.image);
         new Handler().postDelayed(new Runnable() {
@@ -40,9 +37,16 @@ ConstraintLayout layout;
                 signUp.setVisibility(View.VISIBLE);
                 interior.setVisibility(View.VISIBLE);
             markup.setVisibility(View.INVISIBLE);
-          //      startActivity(new Intent(MainActivity.this,LoginRegister.class));
+          //      startActivity(new Intent(MainActivity.this,Register.class));
                 //Toast.makeText(MainActivity.this, "Hi user", Toast.LENGTH_SHORT).show();
             }
-        },5000);
+        },2000);
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,Register.class));
+            }
+        });
     }
 }

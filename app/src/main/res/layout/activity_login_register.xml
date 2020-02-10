@@ -4,8 +4,147 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginRegister">
 
+    tools:context=".Register">
+
+    <ImageView
+        android:layout_width="409dp"
+        android:layout_height="262dp"
+        android:src="@drawable/teacher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageView>
+
+
+    <!--    <RadioGroup-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        tools:layout_editor_absoluteX="63dp"-->
+<!--        tools:layout_editor_absoluteY="462dp"-->
+<!--    <RadioButton-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        tools:layout_editor_absoluteX="51dp"-->
+<!--        tools:layout_editor_absoluteY="462dp" />></RadioGroup>-->
+
+
+    <EditText
+        android:id="@+id/Name"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="24dp"
+
+
+        android:background="@drawable/text_shape"
+        android:elevation="202dp"
+        android:hint="Full Name"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.736"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Email">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/Password"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="20dp"
+
+        android:background="@drawable/text_shape"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.852"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Name">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/Pasword1"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="24dp"
+
+        android:background="@drawable/text_shape"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.763"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Password">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/Email"
+
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="264dp"
+        android:background="@drawable/text_shape"
+        android:hint="Email"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.823"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </EditText>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/Register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Pasword1">
+
+        <RadioButton
+            android:id="@+id/radio_teacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="220dp"
+            android:text="Teacher "
+            android:textSize="15sp" />
+
+        <RadioButton
+            android:id="@+id/radio_Student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student"
+
+            android:textSize="15sp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/Register"
+        android:layout_width="201dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="52dp"
+        android:background="@drawable/button_shape1"
+        android:text="Register"
+        android:textColor="#FFF"
+        android:textSize="30sp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"></Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
