@@ -12,10 +12,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
 
 Button login,signUp;
 TextView markup;
+FirebaseAuth Auth;
 ImageView interior;
 ConstraintLayout layout;
     @Override
@@ -27,6 +30,7 @@ ConstraintLayout layout;
         signUp=findViewById(R.id.Register);
         layout=findViewById(R.id.layout);
         interior=findViewById(R.id.image);
+        Auth=FirebaseAuth.getInstance();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -41,6 +45,8 @@ ConstraintLayout layout;
                 //Toast.makeText(MainActivity.this, "Hi user", Toast.LENGTH_SHORT).show();
             }
         },2000);
+
+
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
