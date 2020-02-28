@@ -19,24 +19,26 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class HomePage extends AppCompatActivity {
+public class HomePageTeacher extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+
+        setContentView(R.layout.activity_home_page_teacher);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+      //  FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//
+//                       }
+//        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -53,7 +55,7 @@ public class HomePage extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_page, menu);
+        getMenuInflater().inflate(R.menu.home_page_teacher, menu);
         return true;
     }
 
@@ -66,20 +68,23 @@ public class HomePage extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder build=new AlertDialog.Builder(this);
-        build.setMessage("Are You Sure You Want To Exit ");
-        build.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-           finish();
-            }
-        });
-        build.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(HomePage.this, "Welcome Back", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-    }
+            AlertDialog.Builder build=new AlertDialog.Builder(this);
+            build.setMessage("Are You Sure You Want To Exit ");
+            build.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            build.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(HomePageTeacher.this, "Welcome Back", Toast.LENGTH_SHORT).show();
+                }
+            });
+            build.show();
+
+
+        }
 }
