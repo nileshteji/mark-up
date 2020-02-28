@@ -56,5 +56,11 @@ ConstraintLayout layout;
                 startActivity(new Intent(MainActivity.this,Register.class));
             }
         });
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+        });
     }
 }
