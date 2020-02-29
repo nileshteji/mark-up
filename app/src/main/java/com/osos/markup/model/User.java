@@ -1,10 +1,13 @@
-package com.osos.markup;
+package com.osos.markup.model;
 
 public class User {
     String Email;
     String Category;
     String Name;
-    User(String Email,String Category,String Name){
+    User(){
+
+    }
+    public User(String Email, String Category, String Name){
         this.Email=Email;
         this.Category=Category;
         this.Name=Name;

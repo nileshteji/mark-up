@@ -2,14 +2,9 @@ package com.osos.markup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 
-import android.app.DirectAction;
-import android.app.Notification;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,14 +17,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.jar.Attributes;
+import com.osos.markup.model.User;
 
 
 public class Register extends AppCompatActivity {
@@ -90,6 +80,7 @@ public class Register extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             refernce.child("User").child(Phone.getText().toString()).setValue(new User(Email.getText().toString(), "Teacher", Name.getText().toString()));
                                             pg.setVisibility(View.INVISIBLE);
+                                            startActivity(new Intent(Register.this,LoginActivity.class));
                                             // startActivity(new Intent(Register.this,HomePage.class));
 
                                         } else {
@@ -104,6 +95,7 @@ public class Register extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isComplete()) {
                                             pg.setVisibility(View.INVISIBLE);
+
                                             refernce.child("User").child(Phone.getText().toString()).setValue(new User(Email.getText().toString(), "Student", Name.getText().toString()));
                                             Toast.makeText(Register.this, "Done", Toast.LENGTH_SHORT).show();
 
