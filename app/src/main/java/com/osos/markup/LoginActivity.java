@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                                    if((obj.getCategory().toString()).equals("Teacher")){
 //                                       Login.setClickable(false);
                                        pg.setVisibility(View.INVISIBLE);
-                                       Intent intent=new Intent(LoginActivity.this,HomePageTeacher.class);
+                                       Intent intent=new Intent(LoginActivity.this,Teacher.class);
                                        startActivity(intent);
                                    }
                                    else if(obj.getCategory().toString().equals("Student ")){

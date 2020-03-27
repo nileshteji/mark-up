@@ -36,11 +36,18 @@ ConstraintLayout layout;
             public void run() {
 //                Animation slideup= AnimationUtils.loadAnimation(MainActivity.this,R.anim.slide_up);
 //                markup.startAnimation(slideup);
+
+
+            if(Auth.getCurrentUser()==null){
                 layout.setBackgroundColor(Color.WHITE);
                 login.setVisibility(View.VISIBLE);
                 signUp.setVisibility(View.VISIBLE);
                 interior.setVisibility(View.VISIBLE);
-            markup.setVisibility(View.INVISIBLE);
+                markup.setVisibility(View.INVISIBLE);
+            }
+            else{
+                startActivity(new Intent(MainActivity.this,Teacher.class));
+            }
           //      startActivity(new Intent(MainActivity.this,Register.class));
                 //Toast.makeText(MainActivity.this, "Hi user", Toast.LENGTH_SHORT).show();
             }
