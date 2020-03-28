@@ -9,50 +9,26 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
-        app:cardCornerRadius="40dp"
+        android:layout_width="148dp"
 
-        android:layout_width="252dp"
-        android:layout_height="196dp"
-        app:cardBackgroundColor="#000000"
+        android:layout_height="155dp"
+        android:padding="50dp"
+        app:cardBackgroundColor="#0024FF"
+        app:cardCornerRadius="40dp"
         app:cardElevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.147"
+        app:layout_constraintVertical_bias="0.256"
         tools:ignore="MissingConstraints">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="240dp"
-            android:layout_height="177dp"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
 
-            android:src="@drawable/calendar_foreground">
-
-        </androidx.appcompat.widget.AppCompatImageView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView1"
-            android:layout_width="252dp"
-
-            android:layout_height="196dp"
-            app:cardBackgroundColor="#000000"
-            app:cardCornerRadius="40dp"
-            app:cardElevation="20dp"
-            tools:ignore="MissingConstraints">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-
-                android:src="@drawable/calendar_foreground">
-
-            </androidx.appcompat.widget.AppCompatImageView>
-
-
-        </com.google.android.material.card.MaterialCardView>
+            android:src="@drawable/calendar_foreground"></ImageView>
 
 
     </com.google.android.material.card.MaterialCardView>
@@ -69,46 +45,69 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-        app:layout_constraintVertical_bias="0.783">
+        app:layout_constraintVertical_bias="0.641">
 
     </androidx.appcompat.widget.AppCompatTextView>
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="252dp"
-        android:layout_height="196dp"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        app:cardBackgroundColor="#FFD000"
         app:cardCornerRadius="40dp"
-       app:cardBackgroundColor="#000"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
-        app:layout_constraintVertical_bias="0.21">
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" >
 
-        <ImageView
+
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/android_class"
-            android:layout_width="256dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/android_class">
 
-        </ImageView>
+        </androidx.appcompat.widget.AppCompatImageView>
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_marginTop="12dp"
         android:text="Attendance"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-        app:layout_constraintVertical_bias="0.065">
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView">
 
     </androidx.appcompat.widget.AppCompatTextView>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#0C0C0C"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <TextView
+            android:id="@id/toolbar"
+            android:text="Mark Up"
+            android:textColor="#FFFFFF"
+
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ></TextView>
+
+
+
+    </androidx.appcompat.widget.Toolbar>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
