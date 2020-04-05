@@ -10,7 +10,6 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="148dp"
-
         android:layout_height="155dp"
         android:padding="50dp"
         app:cardBackgroundColor="#0024FF"
@@ -24,6 +23,7 @@
         tools:ignore="MissingConstraints">
 
         <ImageView
+            android:id="@+id/attendance"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
@@ -45,7 +45,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-        app:layout_constraintVertical_bias="0.641">
+        app:layout_constraintVertical_bias="0.76">
 
     </androidx.appcompat.widget.AppCompatTextView>
 
@@ -74,7 +74,7 @@
         android:id="@+id/appCompatTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="40dp"
         android:text="Attendance"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,6 +108,20 @@
 
 
     </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:textSize="30sp"
+        android:textAlignment="center"
+
+        android:id="@+id/textView2"
+        android:layout_width="400dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="155dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

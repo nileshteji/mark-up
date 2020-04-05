@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.osos.markup.model.User;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText Username, Password, Phone;
+    EditText Email, Password, Phone;
     Button Login;
     FirebaseAuth mAuth;
     ProgressBar pg;
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth=FirebaseAuth.getInstance().getInstance();
-        Username = findViewById(R.id.editText);
+        Email = findViewById(R.id.editText);
         Phone = findViewById(R.id.editText3);
         pg=findViewById(R.id.progressBar2);
         Password = findViewById(R.id.editText2);
@@ -54,60 +55,79 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 pg.setVisibility(View.VISIBLE);
                 Login.setClickable(false);
-                mAuth.signInWithEmailAndPassword(Username.getText().toString(), Password.getText().toString()).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful())
-                            mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                mRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                   User obj=(User) dataSnapshot.child(Phone.getText().toString()).getValue(User.class);
-                                   if((obj.getCategory().toString()).equals("Teacher")){
+                                public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.child(Phone.getText().toString()).getValue(User.class) != null) {
+                                            final User obj = dataSnapshot.child(Phone.getText().toString()).getValue(User.class);
+                                            mAuth.signInWithEmailAndPassword(Email.getText().toString(), Password.getText().toString()).
+                                                    addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                                            if (task.isSuccessful()) {
+
+                                                                if ((obj.getCategory().toString()).equals("Teacher")) {
 //                                       Login.setClickable(false);
-                                       pg.setVisibility(View.INVISIBLE);
-                                       Intent intent=new Intent(LoginActivity.this,Teacher.class);
-                                       startActivity(intent);
-                                   }
-                                   else if(obj.getCategory().toString().equals("Student ")){
-                                       Toast.makeText(LoginActivity.this, "Working on this feature", Toast.LENGTH_SHORT).show();
+                                                                    pg.setVisibility(View.INVISIBLE);
+                                                                    Intent intent = new Intent(LoginActivity.this, Teacher.class);
+                                                                    SharedPreferences sharedPreferences = getSharedPreferences("Username", MODE_PRIVATE);
+                                                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                                    editor.putString("Username", Phone.getText().toString());
+                                                                    editor.commit();
+                                                                    startActivity(intent);
+                                                                } else if (obj.getCategory().toString().equals("Student ")) {
+                                                                    Toast.makeText(LoginActivity.this, "Working on this feature", Toast.LENGTH_SHORT).show();
 
-                                   }
+                                                                }
 
-                                   else{
-                                       final AlertDialog.Builder alert=new AlertDialog.Builder(LoginActivity.this);
-                                       alert.setTitle("No User Exists");
-                                       alert.setPositiveButton("Register", new DialogInterface.OnClickListener() {
-                                           @Override
-                                           public void onClick(DialogInterface dialog, int which) {
-                                               startActivity(new Intent(LoginActivity.this,Register.class));
-                                           }
-                                       });
 
-                                     alert.setCancelable(true);
-                                     alert.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                         @Override
-                                         public void onCancel(DialogInterface dialog) {
-                                                dialog.cancel();
-                                         }
-                                     });
-                                   }
+                                                            } else {
+                                                                Toast.makeText(LoginActivity.this, "Please Try Again Later", Toast.LENGTH_SHORT).show();
+                                                            }
+
+
+                                                        }
+                                                    });
+                                        } else {
+
+                                            pg.setVisibility(View.INVISIBLE);
+                                            final AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
+                                            alert.setTitle("No User Exists");
+                                            alert.setPositiveButton("Register", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    startActivity(new Intent(LoginActivity.this, Register.class));
+                                                }
+                                            });
+
+                                            alert.setCancelable(true);
+                                            alert.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                                @Override
+                                                public void onCancel(DialogInterface dialog) {
+                                                    dialog.cancel();
+                                                }
+                                            });
+                                            Login.setClickable(true);
+                                            alert.show();
+//
+                                        }
+//
 
 
                                 }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    pg.setVisibility(View.INVISIBLE);
-                                    Toast.makeText(LoginActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                    }
+                                    @Override
+                                    public void onCancelled (@NonNull DatabaseError databaseError){
 
-                });
+                                    }
 
 
+                    ;
+                        });
             }
         });
     }
 }
+
+

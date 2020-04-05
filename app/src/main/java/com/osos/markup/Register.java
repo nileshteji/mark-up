@@ -17,8 +17,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.osos.markup.model.User;
 
 
@@ -46,7 +49,7 @@ public class Register extends AppCompatActivity {
         CPassword = findViewById(R.id.Pasword1);
         teacher = findViewById(R.id.radio_teacher);
         student = findViewById(R.id.radio_Student);
-        refernce = FirebaseDatabase.getInstance().getReference("Data");
+        refernce = FirebaseDatabase.getInstance().getReference("/Data/User");
 
         // startActivity(new Intent(Register.this,HomePageTeacher.class));
         Register.setOnClickListener(new View.OnClickListener() {
@@ -74,22 +77,51 @@ public class Register extends AppCompatActivity {
                         if (CPassword.getText().toString().equals(Password.getText().toString())) {
                             if (teacher.isChecked()) {
                                 pg.setVisibility(View.VISIBLE);
-                                Authentication.createUserWithEmailAndPassword(Email.getText().toString(), Password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            refernce.child("User").child(Phone.getText().toString()).setValue(new User(Email.getText().toString(), "Teacher", Name.getText().toString()));
-                                            pg.setVisibility(View.INVISIBLE);
-                                            startActivity(new Intent(Register.this,LoginActivity.class));
-                                            // startActivity(new Intent(Register.this,HomePage.class));
 
-                                        } else {
-                                            Toast.makeText(Register.this, "Please Try Again Later", Toast.LENGTH_SHORT).show();
-                                            pg.setVisibility(View.INVISIBLE);
+                                refernce.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        {
+                                            if(dataSnapshot.child(Phone.getText().toString()).getValue(User.class)!=null){
+                                                pg.setVisibility(View.INVISIBLE);
+                                                Toast.makeText(Register.this, "User Already Exists", Toast.LENGTH_SHORT).show();
+                                            }
+                                            else{
+
+                                                Authentication.createUserWithEmailAndPassword(Email.getText().toString(), Password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                                        if (task.isSuccessful()) {
+                                                            refernce.child(Phone.getText().toString()).setValue(new User(Email.getText().toString(), "Teacher", Name.getText().toString()));
+                                                            pg.setVisibility(View.INVISIBLE);
+                                                            startActivity(new Intent(Register.this,LoginActivity.class));
+                                                            // startActivity(new Intent(Register.this,HomePage.class));
+
+                                                        } else {
+                                                            Toast.makeText(Register.this, "Please Try Again Later", Toast.LENGTH_SHORT).show();
+                                                            pg.setVisibility(View.INVISIBLE);
+                                                        }
+                                                    }
+                                                });
+                                            }
                                         }
+
+
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                                     }
                                 });
-                            } else if (student.isChecked()) {
+
+
+                            }
+
+
+                            else if (student.isChecked()) {
                                 Authentication.createUserWithEmailAndPassword(Email.getText().toString(), Password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {

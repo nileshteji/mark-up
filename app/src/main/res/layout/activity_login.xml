@@ -12,7 +12,7 @@
         android:layout_height="56dp"
         android:background="@drawable/text_shape"
         android:ems="10"
-        android:hint="Name"
+        android:hint="Email "
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"

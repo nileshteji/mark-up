@@ -6,24 +6,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.net.URISyntaxException;
 
 public class Teacher extends AppCompatActivity {
 DrawerLayout drawerLayout;
 DrawerLayout boj;
 ActionBarDrawerToggle drawerToggle;
 NavigationView navigationView;
-ImageView attendClass;
+ImageView attendClass,Attendance;
+TextView Welcome;
 Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,28 @@ Toolbar toolbar;
         setContentView(R.layout.activity_teacher);
         attendClass=findViewById(R.id.android_class);
         toolbar=findViewById(R.id.toolbar);
+        @SuppressLint("WrongConstant")
+        SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
+        Welcome=findViewById(R.id.textView2);
+        Attendance=findViewById(R.id.attendance);
+
+        Attendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Teacher.this,Attendance.class));
+            }
+        });
+
+
+
+
+String a=sharedPreferences.getString("Username","");
+Welcome.setText("Welcome"+" "+a);
+
+
+
+
+
 
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
        setSupportActionBar(toolbar);
@@ -78,5 +106,12 @@ Toolbar toolbar;
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/nileshteji/MarkUp")));
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+
     }
 }
