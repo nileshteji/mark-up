@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="381dp"
+        android:layout_width="match_parent"
         android:layout_height="134dp"
         android:layout_margin="20dp"
         app:cardCornerRadius="20dp"
@@ -24,7 +24,7 @@
 
             <View
                 android:background="#005FFF"
-                android:layout_width="378dp"
+                android:layout_width="match_parent"
                 android:layout_height="20dp"
                 app:cornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -36,7 +36,7 @@
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="379dp"
+                android:layout_width="match_parent"
                 android:layout_height="79dp"
 
                 android:padding="20dp"

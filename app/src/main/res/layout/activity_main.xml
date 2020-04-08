@@ -32,9 +32,9 @@
         android:textColor="#FFF"
         android:textSize="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.436"
-        tools:layout_editor_absoluteX="0dp"></TextView>
+        app:layout_constraintVertical_bias="0.0"></TextView>
 
     <Button
         android:id="@+id/Register"
@@ -47,7 +47,11 @@
         android:textColor="#FFF"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/image"
+        app:layout_constraintVertical_bias="1.0">
 
     </Button>
 
@@ -61,10 +65,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Register"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.63"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.831"></Button>
+        app:layout_constraintVertical_bias="0.833"></Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

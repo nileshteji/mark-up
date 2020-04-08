@@ -77,13 +77,16 @@ public class LoginActivity extends AppCompatActivity {
                                                                     editor.commit();
                                                                     startActivity(intent);
                                                                 } else if (obj.getCategory().toString().equals("Student ")) {
+                                                                    pg.setVisibility(View.INVISIBLE);
                                                                     Toast.makeText(LoginActivity.this, "Working on this feature", Toast.LENGTH_SHORT).show();
 
                                                                 }
 
 
                                                             } else {
+                                                                pg.setVisibility(View.INVISIBLE);
                                                                 Toast.makeText(LoginActivity.this, "Please Try Again Later", Toast.LENGTH_SHORT).show();
+                                                                Login.setClickable(true);
                                                             }
 
 
