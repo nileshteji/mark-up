@@ -10,18 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.osos.markup.Attendance;
+import com.osos.markup.Main2Activity;
 import com.osos.markup.R;
 
 import java.util.ArrayList;
 
 
-public class ClassAdapter extends  RecyclerView.Adapter<ClassAdapter.ClassHolder> {
+public class DateAdapter extends  RecyclerView.Adapter<DateAdapter.ClassHolder> {
     Context c;
     ArrayList<String> arrayList;
-    Attendance boj;
+  Main2Activity boj;
 
 
-    public ClassAdapter(Context c, ArrayList<String> arrayList, Attendance obj){
+    public DateAdapter(Context c, ArrayList<String> arrayList, Main2Activity obj){
         this.c=c;
         this.arrayList=arrayList;
         boj=obj;
@@ -30,8 +31,8 @@ public class ClassAdapter extends  RecyclerView.Adapter<ClassAdapter.ClassHolder
     @NonNull
     @Override
     public ClassHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View view= LayoutInflater.from(c).inflate(R.layout.classadapter,parent,false);
-       return new ClassHolder(view) ;
+        View view= LayoutInflater.from(c).inflate(R.layout.classadapter,parent,false);
+        return new ClassHolder(view) ;
     }
 
     @Override
@@ -39,13 +40,6 @@ public class ClassAdapter extends  RecyclerView.Adapter<ClassAdapter.ClassHolder
         holder.obj.setText(arrayList.get(position));
 
 
-        holder.obj.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boj.OnClick(arrayList.get(position));
-
-            }
-        });
 
 
 
@@ -65,7 +59,7 @@ public class ClassAdapter extends  RecyclerView.Adapter<ClassAdapter.ClassHolder
             super(itemView);
             obj=itemView.findViewById(R.id.dateNAme);
         }
-}
+    }
 
 
 }

@@ -68,7 +68,7 @@ public class Attendance extends AppCompatActivity {
 
 
 
-                ClassAdapter obj=new ClassAdapter(Attendance.this,arrayList);
+                ClassAdapter obj=new ClassAdapter(Attendance.this,arrayList,Attendance.this);
                 LinearLayoutManager linearLayoutManager=new LinearLayoutManager(Attendance.this);
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setAdapter(obj);
@@ -105,4 +105,14 @@ public class Attendance extends AppCompatActivity {
 
 
     }
+
+    public void OnClick(String a){
+        Intent intent=new Intent(Attendance.this,Main2Activity.class);
+        intent.putExtra("data",a);
+        startActivity(intent);
+
+    }
+
+
+
 }
