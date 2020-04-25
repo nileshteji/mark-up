@@ -20,13 +20,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -39,9 +37,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.osos.markup.model.Details;
-import com.osos.markup.model.User;
-
-import java.sql.Time;
 
 public class ClassEnter extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
@@ -87,7 +82,7 @@ public class ClassEnter extends FragmentActivity implements OnMapReadyCallback, 
 
 
 
-        currentLocation = findViewById(R.id.currentLocation);
+        currentLocation = findViewById(R.id.currentLocarton1);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
        currentLocation.setOnClickListener(new View.OnClickListener() {
            @Override

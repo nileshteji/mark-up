@@ -11,7 +11,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/currentLocation"
+        app:layout_constraintBottom_toTopOf="@+id/currentLocarton1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +162,7 @@
         app:layout_constraintEnd_toStartOf="@+id/lang"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentLocation"
+        app:layout_constraintTop_toBottomOf="@+id/currentLocarton1"
         app:layout_constraintVertical_bias="0.294" />
 
     <TextView
@@ -180,7 +180,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/lang"
-        app:layout_constraintTop_toBottomOf="@+id/currentLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/currentLocarton1" />
 
     <TextView
         android:id="@+id/lang"
@@ -198,11 +198,11 @@
         app:layout_constraintEnd_toStartOf="@+id/alt"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/lat"
-        app:layout_constraintTop_toBottomOf="@+id/currentLocation"
+        app:layout_constraintTop_toBottomOf="@+id/currentLocarton1"
         app:layout_constraintVertical_bias="0.294" />
 
     <Button
-        android:id="@+id/currentLocation"
+        android:id="@+id/currentLocarton1"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginLeft="30dp"

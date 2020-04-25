@@ -58,8 +58,9 @@ public class LoginActivity extends AppCompatActivity {
                 mRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-                                    if (dataSnapshot.child(Phone.getText().toString()).getValue(User.class) != null) {
+                                    if (dataSnapshot.child(Phone.getText().toString()).getValue(User.class) != null ) {
                                             final User obj = dataSnapshot.child(Phone.getText().toString()).getValue(User.class);
+                                      if(obj.getEmail().equals(Email.getText().toString()))  {
                                             mAuth.signInWithEmailAndPassword(Email.getText().toString(), Password.getText().toString()).
                                                     addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
 
@@ -78,8 +79,8 @@ public class LoginActivity extends AppCompatActivity {
                                                                     startActivity(intent);
                                                                 } else if (obj.getCategory().toString().equals("Student ")) {
                                                                     pg.setVisibility(View.INVISIBLE);
-                                                                    Toast.makeText(LoginActivity.this, "Working on this feature", Toast.LENGTH_SHORT).show();
-
+                                                                  //  Toast.makeText(LoginActivity.this, "Working on this feature", Toast.LENGTH_SHORT).show();
+                                                                                          startActivity(new Intent(LoginActivity.this,Student.class));
                                                                 }
 
 
@@ -92,6 +93,12 @@ public class LoginActivity extends AppCompatActivity {
 
                                                         }
                                                     });
+                                        }
+                                        else{
+                                            pg.setVisibility(View.INVISIBLE);
+                                          Toast.makeText(LoginActivity.this, "UserName Not Registered with Email ID ", Toast.LENGTH_SHORT).show();
+                                        }
+
                                         } else {
 
                                             pg.setVisibility(View.INVISIBLE);
