@@ -105,7 +105,7 @@ Welcome.setText("Welcome"+" "+a);
         if(item.getItemId()==R.id.action_settings){
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/nileshteji/MarkUp")));
         }
-        if(item.getItemId()=R.id.logout){
+        if(item.getItemId()==R.id.logout){
 
         }
         return super.onOptionsItemSelected(item);

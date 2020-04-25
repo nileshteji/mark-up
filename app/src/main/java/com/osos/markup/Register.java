@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -94,6 +95,10 @@ public class Register extends AppCompatActivity {
                                                         if (task.isSuccessful()) {
                                                             refernce.child(Phone.getText().toString()).setValue(new User(Email.getText().toString(), "Teacher", Name.getText().toString()));
                                                             pg.setVisibility(View.INVISIBLE);
+                                                            SharedPreferences sharedPreferences = getSharedPreferences("Username", MODE_PRIVATE);
+                                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                            editor.putString("Username", Phone.getText().toString());
+                                                            editor.commit();
                                                             startActivity(new Intent(Register.this,LoginActivity.class));
                                                             // startActivity(new Intent(Register.this,HomePage.class));
 
@@ -128,8 +133,12 @@ public class Register extends AppCompatActivity {
                                         if (task.isComplete()) {
                                             pg.setVisibility(View.INVISIBLE);
 
-                                            refernce.child("User").child(Phone.getText().toString()).setValue(new User(Email.getText().toString(), "Student", Name.getText().toString()));
-                                            Toast.makeText(Register.this, "Done", Toast.LENGTH_SHORT).show();
+                                            refernce.child(Phone.getText().toString()).setValue(new User(Email.getText().toString(), "Student", Name.getText().toString()));
+                                            SharedPreferences sharedPreferences = getSharedPreferences("Username", MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putString("Username", Phone.getText().toString());
+                                            editor.commit();
+                                            startActivity(new Intent(Register.this,LoginActivity.class));
 
                                         } else {
                                             pg.setVisibility(View.INVISIBLE);

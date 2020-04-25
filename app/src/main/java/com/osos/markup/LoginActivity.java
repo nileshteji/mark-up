@@ -77,10 +77,13 @@ public class LoginActivity extends AppCompatActivity {
                                                                     editor.putString("Username", Phone.getText().toString());
                                                                     editor.commit();
                                                                     startActivity(intent);
-                                                                } else if (obj.getCategory().toString().equals("Student ")) {
-                                                                    pg.setVisibility(View.INVISIBLE);
-                                                                  //  Toast.makeText(LoginActivity.this, "Working on this feature", Toast.LENGTH_SHORT).show();
-                                                                                          startActivity(new Intent(LoginActivity.this,Student.class));
+                                                                } else if (obj.getCategory().toString().equals("Student")) {
+                                                                     pg.setVisibility(View.INVISIBLE);
+                                                                     SharedPreferences sharedPreferences = getSharedPreferences("Username", MODE_PRIVATE);
+                                                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                                    editor.putString("Username", Phone.getText().toString());
+                                                                    editor.commit();
+                                                                    startActivity(new Intent(LoginActivity.this,Student.class));
                                                                 }
 
 

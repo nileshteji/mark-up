@@ -1,39 +1,39 @@
 package com.osos.markup.model;
 
 public class Details {
-    String  Alt;
-    String Lat;
-    String Long;
+    float  Alt;
+    float Lat;
+    float Long;
     String time;
 
-    public Details(String toString, String toString1, String toString2, String toString3) {
+    public Details(float toString, float toString1, float toString2, String toString3) {
         Alt=toString;
         Lat=toString1;
         Long=toString2;
         time=toString3;
     }
 
-    public String getAlt() {
+    public float getAlt() {
         return Alt;
     }
 
-    public void setAlt(String alt) {
+    public void setAlt(float alt) {
         Alt = alt;
     }
 
-    public String getLat() {
+    public float getLat() {
         return Lat;
     }
 
-    public void setLat(String lat) {
+    public void setLat(float lat) {
         Lat = lat;
     }
 
-    public String getLong() {
+    public float getLong() {
         return Long;
     }
 
-    public void setLong(String aLong) {
+    public void setLong(float aLong) {
         Long = aLong;
     }
 

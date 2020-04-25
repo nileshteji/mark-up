@@ -125,8 +125,8 @@ Add.setOnClickListener(new View.OnClickListener(){
 
             dbRefernce.child(username.getText().toString())
                     .child("Attendance").child(ClassName.getText().toString()).child(date.getText().toString())
-                    .child(CourseCode.getText().toString()).child("Details").setValue(new Details(alt.getText().toString(),
-                    lat.getText().toString(),lang.getText().toString(),time.getText().toString())).
+                    .child(CourseCode.getText().toString()).child("Details").setValue(new Details(Float.valueOf(alt.getText().toString()),
+                    Float.valueOf(lat.getText().toString()),Float.valueOf(lang.getText().toString())    ,time.getText().toString())).
                     addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -135,6 +135,7 @@ Add.setOnClickListener(new View.OnClickListener(){
 
                         }
                     });
+            Log.d("Lag", String.valueOf(Float.valueOf(lang.getText().toString())+0.00000001000));
 
 //
 //            String  Alt;

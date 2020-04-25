@@ -1,18 +1,31 @@
 package com.osos.markup;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.osos.markup.model.Details;
+import com.osos.markup.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +34,7 @@ TextView markup;
 FirebaseAuth Auth;
 ImageView interior;
 ConstraintLayout layout;
+DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +45,7 @@ ConstraintLayout layout;
         layout=findViewById(R.id.layout);
         interior=findViewById(R.id.image);
         Auth=FirebaseAuth.getInstance();
+        databaseReference= FirebaseDatabase.getInstance().getReference("/Data/User");
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -46,7 +61,36 @@ ConstraintLayout layout;
                 markup.setVisibility(View.INVISIBLE);
             }
             else{
-                startActivity(new Intent(MainActivity.this,Teacher.class));
+                Log.d("TAG", Auth.getCurrentUser().getEmail());
+
+
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        try {
+                            @SuppressLint("WrongConstant") SharedPreferences sharedPreferences = getSharedPreferences("Username",MODE_APPEND);
+                            User user = dataSnapshot.child(sharedPreferences.getString("Username","")).getValue(User.class);
+                            if(user.getCategory().equals("Student")){
+                               startActivity(new Intent(MainActivity.this,Student.class));
+                            }
+                            else{
+                                startActivity(new Intent(MainActivity.this,Teacher.class));
+                            }
+
+                        }
+                        catch (Exception e){
+
+                           Toast.makeText(MainActivity.this, "You can only sign in with the phone from which you signed in", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
             }
           //      startActivity(new Intent(MainActivity.this,Register.class));
                 //Toast.makeText(MainActivity.this, "Hi user", Toast.LENGTH_SHORT).show();

@@ -110,7 +110,7 @@
         android:textSize="30sp"
         android:textAlignment="center"
 
-        android:id="@+id/textView2"
+        android:id="@+id/shared"
         android:layout_width="400dp"
         android:layout_height="61dp"
         android:layout_marginBottom="155dp"
