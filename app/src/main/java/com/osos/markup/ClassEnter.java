@@ -158,13 +158,19 @@ Add.setOnClickListener(new View.OnClickListener(){
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        mMap = googleMap;
+        if (ActivityCompat.checkSelfPermission(ClassEnter.this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(ClassEnter.this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
+            ActivityCompat.requestPermissions(ClassEnter.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        }
+        else {
+            Log.e("Enabled","Hi i am in else");
 
-    // Add a marker in Sydney and move the camera
-    LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,ClassEnter.this);
+
+        }
 }
     @Override
     public void onLocationChanged(Location location) {
