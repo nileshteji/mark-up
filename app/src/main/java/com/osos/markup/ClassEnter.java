@@ -158,6 +158,10 @@ Add.setOnClickListener(new View.OnClickListener(){
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+        mMap = googleMap;
+
+
+    // Add a marker in Sydney and move the camera
         if (ActivityCompat.checkSelfPermission(ClassEnter.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(ClassEnter.this,
@@ -167,7 +171,7 @@ Add.setOnClickListener(new View.OnClickListener(){
         }
         else {
             Log.e("Enabled","Hi i am in else");
-
+            boj.setVisibility(View.VISIBLE);
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,ClassEnter.this);
 
         }
