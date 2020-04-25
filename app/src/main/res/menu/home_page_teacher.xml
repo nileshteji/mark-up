@@ -6,4 +6,6 @@
         android:orderInCategory="100"
         android:title="Source Code"
         app:showAsAction="never" />
+    <item android:id="@+id/logout"
+        android:title="Log Out"></item>
 </menu>

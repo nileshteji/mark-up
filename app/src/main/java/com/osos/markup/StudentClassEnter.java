@@ -34,6 +34,7 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
     LocationManager locationManager;
     Button currentLocation;
     TextView lat,lang,alt;
+    Button EnterAtt;
 
 
 
