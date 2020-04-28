@@ -43,6 +43,9 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
     TextView Date;
     TextView Time;
     TextView username;
+    EditText teacherNumber,Name;
+    ProgressBar progressBar;
+
 
 
     @Override
@@ -55,6 +58,8 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
 
         mapFragment.getMapAsync(this);
         username=findViewById(R.id.username);
+        progressBar=findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         @SuppressLint("WrongConstant") SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
         username.setText(sharedPreferences.getString("Username","null"));
         currentLocation = findViewById(R.id.currentLocarton1);
@@ -81,6 +86,8 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
         LatLng current=new LatLng(location.getLatitude(),location.getLongitude());
         mMap.addMarker(new MarkerOptions().position(current).title("Current Locatioin"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current,16.0f));
+        progressBar.setVisibility(View.INVISIBLE);
+
 
     }
 
