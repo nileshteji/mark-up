@@ -42,7 +42,12 @@ public class DateAdapter extends  RecyclerView.Adapter<DateAdapter.ClassHolder> 
 
 
 
-        holder.card.setOnClickListener(new View.onClic );
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boj.onClick(arrayList.get(position));
+            }
+        });
 
 
 

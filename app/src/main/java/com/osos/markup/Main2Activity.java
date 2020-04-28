@@ -98,6 +98,13 @@ public class Main2Activity extends AppCompatActivity {
     public void onClick(String a){
         //data
         //date
+        Intent intent=new Intent(Main2Activity.this,SubjectActivity.class);
+        intent.putExtra("data",data);
+        intent.putExtra("date",a);
+        startActivity(intent);
+
+
+
 
 
     }
