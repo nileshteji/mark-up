@@ -90,5 +90,16 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
+
+
+
     }
+
+    public void onClick(String a){
+        //data
+        //date
+
+
+    }
+
 }

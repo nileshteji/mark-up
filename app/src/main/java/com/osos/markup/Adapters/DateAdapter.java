@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.osos.markup.Attendance;
@@ -41,6 +42,10 @@ public class DateAdapter extends  RecyclerView.Adapter<DateAdapter.ClassHolder> 
 
 
 
+        holder.card.setOnClickListener(new View.onClic );
+
+
+
 
 
     }
@@ -55,9 +60,11 @@ public class DateAdapter extends  RecyclerView.Adapter<DateAdapter.ClassHolder> 
     class ClassHolder extends RecyclerView.ViewHolder {
 
         TextView obj;
+        CardView card;
         public ClassHolder(@NonNull View itemView) {
             super(itemView);
             obj=itemView.findViewById(R.id.dateNAme);
+            card=itemView.findViewById(R.id.cardView);
         }
     }
 

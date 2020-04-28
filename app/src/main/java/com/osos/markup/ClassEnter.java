@@ -175,8 +175,8 @@ Add.setOnClickListener(new View.OnClickListener(){
                    boj.setVisibility(View.VISIBLE);
 
             dbRefernce.child(username.getText().toString())
-                    .child("Attendance").child(ClassName.getText().toString()).child(date.getText().toString())
-                    .child(CourseCode.getText().toString()).child("Details").setValue(new Details(Float.valueOf(alt.getText().toString()),
+                    .child("Attendance").child(ClassName.getText().toString().toLowerCase()).child(date.getText().toString())
+                    .child(CourseCode.getText().toString().toLowerCase()).child("Details").setValue(new Details(Float.valueOf(alt.getText().toString()),
                     Float.valueOf(lat.getText().toString()),Float.valueOf(lang.getText().toString())    ,time.getText().toString())).
                     addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
