@@ -75,6 +75,7 @@ public class ClassEnter extends FragmentActivity implements OnMapReadyCallback, 
         username=findViewById(R.id.username);
         @SuppressLint("WrongConstant") SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
         String a =sharedPreferences.getString("Username","");
+
         username.setText(a);
 
 

@@ -4,7 +4,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -28,6 +30,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class StudentClassEnter extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
@@ -35,8 +40,9 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
     Button currentLocation;
     TextView lat,lang,alt;
     Button EnterAtt;
-
-
+    TextView Date;
+    TextView Time;
+    TextView username;
 
 
     @Override
@@ -46,39 +52,32 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        currentLocation=findViewById(R.id.currentLocarton1);
+
         mapFragment.getMapAsync(this);
+        username=findViewById(R.id.username);
+        @SuppressLint("WrongConstant") SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
+        username.setText(sharedPreferences.getString("Username","null"));
         currentLocation = findViewById(R.id.currentLocarton1);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        currentLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(StudentClassEnter.this,
-                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                        ActivityCompat.checkSelfPermission(StudentClassEnter.this,
-                                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        Date=findViewById(R.id.Date);
+        Time=findViewById(R.id.Time);
+        Date.setText(new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime()));
+        Time.setText(new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime()));
+        
 
-                    ActivityCompat.requestPermissions(StudentClassEnter.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
-                }
-                else {
-                    Log.e("Enabled","Hi i am in else");
 
-                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,StudentClassEnter.this);
 
-                }
-            }
-        });
+
+
+
+
+
+
     }
 
 
     @Override
     public void onLocationChanged(Location location) {
-        lat=findViewById(R.id.lat);
-        lang=findViewById(R.id.lang);
-        alt=findViewById(R.id.alt);
-        lat.setText(String.valueOf(location.getLatitude()));
-        lang.setText(String.valueOf(location.getLongitude()));
-        alt.setText(String.valueOf(location.getAltitude()));
         LatLng current=new LatLng(location.getLatitude(),location.getLongitude());
         mMap.addMarker(new MarkerOptions().position(current).title("Current Locatioin"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current,16.0f));

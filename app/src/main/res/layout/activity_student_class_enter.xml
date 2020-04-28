@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/currentLocarton1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,123 +18,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".ClassEnter" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText2"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/text_shape"
-        android:hint="Subject Name"
-        android:textAlignment="center"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username">
-
-
-    </com.google.android.material.textfield.TextInputEditText>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/text_shape"
-        android:hint="Branch Name"
-        android:textAlignment="center"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText2">
-
-
-    </com.google.android.material.textfield.TextInputEditText>
-
-    <EditText
-        android:id="@+id/editText5"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/text_shape"
-        android:ems="10"
-        android:hint="Roll Number"
-        android:inputType="time"
-        android:textAlignment="center"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <EditText
-        android:id="@+id/date"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/text_shape"
-        android:ems="10"
-        android:hint="Full Name"
-        android:inputType="date"
-        android:textAlignment="center"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-
-        android:layout_height="1dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="50dp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5"></TextView>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-
-        android:layout_height="1dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/editText5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date"></TextView>
-
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/round_shape"
         android:text="Mark AttenDance"
         android:textColor="#EEE"
@@ -142,116 +33,121 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.19" />
-
-    <TextView
-        android:id="@+id/lat"
-
-        android:layout_width="103dp"
-        android:layout_height="40dp"
-
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/text_shape"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/username"
-        app:layout_constraintEnd_toStartOf="@+id/lang"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentLocarton1"
-        app:layout_constraintVertical_bias="0.294" />
-
-    <TextView
-        android:id="@+id/alt"
-        android:layout_width="103dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-
-
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/text_shape"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/lang"
-        app:layout_constraintTop_toBottomOf="@+id/currentLocarton1" />
-
-    <TextView
-        android:id="@+id/lang"
-        android:layout_width="103dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-
-
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/text_shape"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/username"
-        app:layout_constraintEnd_toStartOf="@+id/alt"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/lat"
-        app:layout_constraintTop_toBottomOf="@+id/currentLocarton1"
-        app:layout_constraintVertical_bias="0.294" />
+        app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
     <Button
         android:id="@+id/currentLocarton1"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/button_shape1"
         android:text="Get Location"
         android:textColor="#EEE"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/alt"
+        app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map" />
 
-    <ProgressBar
-        android:id="@+id/progressBar4"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="304dp"
-        android:layout_height="132dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.467"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.59" />
-
     <TextView
         android:id="@+id/username"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="30dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/text_shape"
-        android:text="TextView"
+        android:hint="Username"
         android:textAlignment="center"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputEditText2"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/TeacherNo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alt" />
+        app:layout_constraintTop_toBottomOf="@+id/currentLocarton1" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="163dp"
-        app:layout_constraintGuide_percent="0.25" />
+    <EditText
+        android:id="@+id/TeacherNo"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/text_shape"
+        android:hint="Teacher Number"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/Date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/text_shape"
+        android:text="Date "
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/Time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TeacherNo" />
+
+    <TextView
+        android:id="@+id/Time"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/text_shape"
+        android:text="Time"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editText4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Date" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/text_shape"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/editText6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Time" />
+
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/text_shape"
+        android:ems="10"
+        android:hint="Roll Number"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText4" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
