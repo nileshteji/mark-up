@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.osos.markup.Attendance;
 import com.osos.markup.Main2Activity;
 import com.osos.markup.R;
+import com.osos.markup.SubjectActivity;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,9 @@ public class DateAdapter extends  RecyclerView.Adapter<DateAdapter.ClassHolder> 
         this.arrayList=arrayList;
         boj=obj;
     }
+
+
+
 
     @NonNull
     @Override

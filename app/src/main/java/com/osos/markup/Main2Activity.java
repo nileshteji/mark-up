@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +32,8 @@ public class Main2Activity extends AppCompatActivity {
     ProgressBar progressBar;
     RecyclerView recyclerView;
     Toolbar toolbar;
+    String a1;
+    String a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +52,8 @@ public class Main2Activity extends AppCompatActivity {
         Intent recieve=getIntent();
         @SuppressLint("WrongConstant")
         SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
-        String a =sharedPreferences.getString("Username","");
-        String a1=recieve.getStringExtra("data");
+        a =sharedPreferences.getString("Username","");
+       a1=recieve.getStringExtra("data");
         databaseReference=FirebaseDatabase.getInstance()
                 .getReference("/Data/User"+"/"+a+"/Attendance/"+a1);
         data=new ArrayList<>();
@@ -96,11 +99,12 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public void onClick(String a){
+        Toast.makeText(this, a, Toast.LENGTH_SHORT).show();
         //data
         //date
         Intent intent=new Intent(Main2Activity.this,SubjectActivity.class);
-        intent.putExtra("data",data);
         intent.putExtra("date",a);
+        intent.putExtra("batch",a1);
         startActivity(intent);
 
 

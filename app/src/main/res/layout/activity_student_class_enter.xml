@@ -10,22 +10,20 @@
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/currentLocarton1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside"
         tools:context=".ClassEnter" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/round_shape"
         android:text="Mark AttenDance"
         android:textColor="#EEE"
@@ -33,16 +31,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintTop_toBottomOf="@+id/roll" />
 
     <Button
         android:id="@+id/currentLocarton1"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button_shape1"
         android:text="Get Location"
         android:textColor="#EEE"
@@ -57,13 +53,13 @@
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/text_shape"
         android:hint="Username"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/TeacherNo"
+        app:layout_constraintBottom_toTopOf="@+id/Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentLocarton1" />
@@ -73,24 +69,41 @@
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/text_shape"
         android:hint="Teacher Number"
+        android:inputType="phone"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/Date"
+        app:layout_constraintBottom_toTopOf="@+id/batch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/Time" />
+
+    <EditText
+        android:id="@+id/batch"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/text_shape"
+        android:hint="Batch"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/StudentNAme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TeacherNo" />
 
     <TextView
         android:id="@+id/Date"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/text_shape"
         android:text="Date "
         android:textAlignment="center"
@@ -98,31 +111,31 @@
         app:layout_constraintBottom_toTopOf="@+id/Time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TeacherNo" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <TextView
         android:id="@+id/Time"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/text_shape"
         android:text="Time"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/editText4"
+        app:layout_constraintBottom_toTopOf="@+id/TeacherNo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Date" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/StudentNAme"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/text_shape"
         android:ems="10"
         android:hint="Name"
@@ -131,15 +144,15 @@
         app:layout_constraintBottom_toTopOf="@+id/Subject "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Time" />
+        app:layout_constraintTop_toBottomOf="@+id/batch" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/roll"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/text_shape"
         android:ems="10"
         android:hint="Roll Number"
@@ -155,17 +168,17 @@
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/text_shape"
         android:ems="10"
-        android:hint="Subject "
+        android:hint="Subject"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/editText6"
+        app:layout_constraintBottom_toTopOf="@+id/roll"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/StudentNAme" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -176,10 +189,9 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.579" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

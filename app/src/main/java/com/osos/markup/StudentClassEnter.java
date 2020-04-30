@@ -1,5 +1,6 @@
 package com.osos.markup;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,7 +30,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -38,13 +44,13 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
     private GoogleMap mMap;
     LocationManager locationManager;
     Button currentLocation;
-    TextView lat,lang,alt;
-    Button EnterAtt;
+    Button MarkAttendance;
     TextView Date;
     TextView Time;
     TextView username;
-    EditText teacherNumber,Name;
     ProgressBar progressBar;
+    EditText teacherNumber,Name,Subject,RollNumber,Batch;
+    DatabaseReference databaseReference;
 
 
 
@@ -57,9 +63,16 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
                 .findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(this);
+        MarkAttendance=findViewById(R.id.button2);
+        databaseReference= FirebaseDatabase.getInstance().getReference("/Data/User");
         username=findViewById(R.id.username);
         progressBar=findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
+        teacherNumber=findViewById(R.id.TeacherNo);
+        Name=findViewById(R.id.StudentNAme);
+        Subject=findViewById(R.id.Subject);
+        Batch=findViewById(R.id.batch);
+        RollNumber=findViewById(R.id.roll);
         @SuppressLint("WrongConstant") SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
         username.setText(sharedPreferences.getString("Username","null"));
         currentLocation = findViewById(R.id.currentLocarton1);
@@ -68,6 +81,38 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
         Time=findViewById(R.id.Time);
         Date.setText(new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime()));
         Time.setText(new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime()));
+
+
+
+
+        MarkAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(teacherNumber.getText().toString().trim().length()>0 && Batch.getText().toString().trim().length()>0 && progressBar.getVisibility()==View.INVISIBLE &&
+                        Name.getText().toString().trim().length()>0 && Subject.getText().toString().trim().length()>0 && RollNumber.getText().toString().trim().length()>0){
+                    databaseReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.hasChild("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+Subject.getText().toString().toLowerCase())){
+                                Toast.makeText(StudentClassEnter.this, "HI Welcome", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(StudentClassEnter.this, "No Class Details match...", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                else{
+                    Toast.makeText(StudentClassEnter.this, "Please Fill the Details", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         
 
 
