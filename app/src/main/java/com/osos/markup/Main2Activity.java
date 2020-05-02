@@ -45,7 +45,7 @@ public class Main2Activity extends AppCompatActivity {
 
         toolbar.setTitleMargin(50,0,0,0);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-        getSupportActionBar().setTitle("Select The Date");
+
         progressBar=findViewById(R.id.progressBar4);
         progressBar.setVisibility(View.VISIBLE);
         recyclerView=findViewById(R.id.recyclerView2);
@@ -54,6 +54,7 @@ public class Main2Activity extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
         a =sharedPreferences.getString("Username","");
        a1=recieve.getStringExtra("data");
+        getSupportActionBar().setTitle(a1);
         databaseReference=FirebaseDatabase.getInstance()
                 .getReference("/Data/User"+"/"+a+"/Attendance/"+a1);
         data=new ArrayList<>();

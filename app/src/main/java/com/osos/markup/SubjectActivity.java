@@ -2,14 +2,18 @@ package com.osos.markup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +32,8 @@ public class SubjectActivity extends AppCompatActivity {
     String date;
     ArrayList<String> arrayList;
     RecyclerView subjectRecyler;
+    Toolbar toolbar;
+    ProgressBar progressBar;
 
 
     @Override
@@ -37,10 +43,36 @@ public class SubjectActivity extends AppCompatActivity {
         @SuppressLint("WrongConstant")
         SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
         String aTemp =sharedPreferences.getString("Username","");
+        toolbar=findViewById(R.id.toolbar5);
+        setSupportActionBar(toolbar);
         subjectRecyler=findViewById(R.id.subject_recycler_view);
-      date=getIntent().getStringExtra("date");
+        toolbar.setTitleMarginStart(50);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               SubjectActivity.super.onBackPressed();
+            }
+        });
+        toolbar.setTitleTextColor(Color.WHITE);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        date=getIntent().getStringExtra("date");
       batch=getIntent().getStringExtra("batch");
       arrayList=new ArrayList<>();
+        getSupportActionBar().setTitle(batch+" "+date);
       databaseReference= FirebaseDatabase.getInstance().
                 getReference("/Data/User/"+aTemp+"/Attendance/"+batch+"/"+date);
         Log.d("KEY1",aTemp);
