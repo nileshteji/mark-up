@@ -85,7 +85,7 @@ public class Register extends AppCompatActivity {
                                         {
                                             if(dataSnapshot.child(Phone.getText().toString()).getValue(User.class)!=null){
                                                 pg.setVisibility(View.INVISIBLE);
-                                                Toast.makeText(Register.this, "User Already Exists", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(Register.this, "Username Already Exists", Toast.LENGTH_SHORT).show();
                                             }
                                             else{
 
