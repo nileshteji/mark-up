@@ -117,19 +117,18 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-
-                                             studentAttendance studentAttendance=new studentAttendance();
+                                                studentAttendance studentAttendance=new studentAttendance();
                                              studentAttendance.execute();
+                                            }
 
-
-                                            } else {
+                                            else {
                                                 progressBar.setVisibility(View.INVISIBLE);
                                                 Toast.makeText(StudentClassEnter.this, "Attendance not marked...Please try again", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
 
-                                    //TODO this will be pushed to the student json file
+
 
 
 
@@ -153,7 +152,7 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
                     });
 
 
-                    //TODO this is code is written for the fetching the data of the same
+
 
 
 
@@ -165,25 +164,6 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
                     Toast.makeText(StudentClassEnter.this, "Please Fill the Details", Toast.LENGTH_SHORT).show();
                 }
 
-
-
-//
-//           databaseReference.child("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+Subject.getText().toString().toLowerCase()+"/Attendance").
-//                        addValueEventListener(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                                for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
-//                                    Log.d("Roll Number",dataSnapshot1.get);
-//                                    Log.d("Name", (String) String.valueOf(dataSnapshot1.getValue()));
-//                                }
-//
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                            }
-//                        });
 
 
 
@@ -257,11 +237,11 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
 
 class studentAttendance extends AsyncTask<Void,Void,Void>{
 
-    @SuppressLint("WrongThread")
+    @SuppressLint({"WrongThread", "WrongConstant"})
     @Override
     protected Void doInBackground(Void... voids) {
         //TODO this is code is written for the fetching the data of the same
-        databaseReference1.child("/Attendance").child(Subject.getText().toString()).child(Date.getText().toString()+" "+Time.getText().toString()).setValue(new StudentAttendanceModel(Batch.getText().toString(), Time.getText().toString(), Subject.getText().toString(), teacherNumber.getText().toString(), Name.getText().toString(), RollNumber.getText().toString()));
+        databaseReference1.child("/Attendance").child(Subject.getText().toString()).child(Date.getText().toString()+" "+getSharedPreferences("Username",MODE_APPEND).getString("Username","null")).setValue(new StudentAttendanceModel(Batch.getText().toString(), Time.getText().toString(), Subject.getText().toString(), teacherNumber.getText().toString(), Name.getText().toString(), RollNumber.getText().toString(),Date.getText().toString()));
 
 
         return null;

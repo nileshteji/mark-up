@@ -8,15 +8,25 @@ public class StudentAttendanceModel {
     String teacherNumber;
     String Name;
     String RollNumber;
+    String date;
 
+    public String getDate() {
+        return date;
+    }
 
-    public StudentAttendanceModel(String className, String time, String subject, String teacherNumber, String name, String rollNumber) {
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public StudentAttendanceModel(String className, String time, String subject, String teacherNumber, String name, String rollNumber, String date) {
         this.className = className;
         Time = time;
         Subject = subject;
         this.teacherNumber = teacherNumber;
         Name = name;
         RollNumber = rollNumber;
+        this.date=date;
+
     }
 
     public String getClassName() {
