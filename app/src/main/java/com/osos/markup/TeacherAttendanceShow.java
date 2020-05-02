@@ -62,7 +62,7 @@ public class TeacherAttendanceShow extends AppCompatActivity {
         //mDatabase= FirebaseDatabase.getInstance().getReference("/Data/User/9356364121/Attendance/OSSB2/02-05-2020/microprocessor/Attendance");
         @SuppressLint("WrongConstant") SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
         String userTemp=sharedPreferences.getString("Username","null");
-        warning.setVisibility(View.VISIBLE);
+      
 
         databaseReference = FirebaseDatabase.getInstance().getReference("/Data/User/" + userTemp + "/Attendance/" + batch + "/" + date + "/" + Subject+"/Attendance");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -72,14 +72,22 @@ public class TeacherAttendanceShow extends AppCompatActivity {
                     list=new ArrayList<>();
                     for (DataSnapshot temp : dataSnapshot.getChildren()) {
                         Log.d("TAG", temp.getKey() + " " + temp.getValue());
+
                         list.add(temp.getKey() + " " + temp.getValue());
                     }
-                    TeacherAttendanceShowAdapter teacherAttendanceShowAdapter = new TeacherAttendanceShowAdapter(getApplicationContext(), list);
-                    recyclerView.setAdapter(teacherAttendanceShowAdapter);
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-                    recyclerView.setLayoutManager(linearLayoutManager);
-                    progressBar.setVisibility(View.INVISIBLE);
-                    warning.setVisibility(View.INVISIBLE);
+                    if(list.size()==0){
+                        warning.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+                    else {
+                        TeacherAttendanceShowAdapter teacherAttendanceShowAdapter = new TeacherAttendanceShowAdapter(getApplicationContext(), list);
+                        recyclerView.setAdapter(teacherAttendanceShowAdapter);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        progressBar.setVisibility(View.INVISIBLE);
+                        warning.setVisibility(View.INVISIBLE);
+                    }
+
 
                 }
 
