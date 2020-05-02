@@ -59,8 +59,10 @@ public class StudentClass1 extends AppCompatActivity {
 
 
         mReference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                subjects=new ArrayList<>();
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                          subjects.add(dataSnapshot1.getKey().toUpperCase());
 

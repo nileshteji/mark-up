@@ -61,6 +61,7 @@ public class Attendance extends AppCompatActivity {
                 addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayList=new ArrayList<>();
                 for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
                    arrayList.add(dataSnapshot1.getKey());

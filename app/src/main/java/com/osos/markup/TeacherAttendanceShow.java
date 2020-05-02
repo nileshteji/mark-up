@@ -55,7 +55,6 @@ public class TeacherAttendanceShow extends AppCompatActivity {
      batch=getIntent().getStringExtra("batch");
      date=getIntent().getStringExtra("date");
      Subject=getIntent().getStringExtra("subject");
-     list=new ArrayList<>();
 
 
         getSupportActionBar().setTitle(batch+" "+date+" "+Subject);
@@ -63,25 +62,24 @@ public class TeacherAttendanceShow extends AppCompatActivity {
         //mDatabase= FirebaseDatabase.getInstance().getReference("/Data/User/9356364121/Attendance/OSSB2/02-05-2020/microprocessor/Attendance");
         @SuppressLint("WrongConstant") SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
         String userTemp=sharedPreferences.getString("Username","null");
+        warning.setVisibility(View.VISIBLE);
 
-            databaseReference = FirebaseDatabase.getInstance().getReference("/Data/User/" + userTemp + "/Attendance/" + batch + "/" + date + "/" + Subject );
+        databaseReference = FirebaseDatabase.getInstance().getReference("/Data/User/" + userTemp + "/Attendance/" + batch + "/" + date + "/" + Subject+"/Attendance");
+        databaseReference.addValueEventListener(new ValueEventListener() {
 
-            try{
-
-            databaseReference.child("Attendance").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    list=new ArrayList<>();
                     for (DataSnapshot temp : dataSnapshot.getChildren()) {
                         Log.d("TAG", temp.getKey() + " " + temp.getValue());
                         list.add(temp.getKey() + " " + temp.getValue());
                     }
-
-
                     TeacherAttendanceShowAdapter teacherAttendanceShowAdapter = new TeacherAttendanceShowAdapter(getApplicationContext(), list);
                     recyclerView.setAdapter(teacherAttendanceShowAdapter);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
                     recyclerView.setLayoutManager(linearLayoutManager);
                     progressBar.setVisibility(View.INVISIBLE);
+                    warning.setVisibility(View.INVISIBLE);
 
                 }
 
@@ -91,11 +89,6 @@ public class TeacherAttendanceShow extends AppCompatActivity {
 
                 }
             });
-        }
-        catch (Exception e){
-            progressBar.setVisibility(View.INVISIBLE);
-            warning.setVisibility(View.VISIBLE);
-        }
 
 
 

@@ -71,7 +71,7 @@ public class SubjectActivity extends AppCompatActivity {
 
         date=getIntent().getStringExtra("date");
       batch=getIntent().getStringExtra("batch");
-      arrayList=new ArrayList<>();
+
         getSupportActionBar().setTitle(batch+" "+date);
       databaseReference= FirebaseDatabase.getInstance().
                 getReference("/Data/User/"+aTemp+"/Attendance/"+batch+"/"+date);
@@ -81,6 +81,7 @@ public class SubjectActivity extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayList=new ArrayList<>();
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                     arrayList.add(dataSnapshot1.getKey());
 

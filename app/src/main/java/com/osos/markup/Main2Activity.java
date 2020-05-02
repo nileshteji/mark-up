@@ -64,6 +64,7 @@ public class Main2Activity extends AppCompatActivity {
       databaseReference.addValueEventListener(new ValueEventListener() {
           @Override
           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+              data=new ArrayList<>();
               for(DataSnapshot d:dataSnapshot.getChildren()){
                   data.add(d.getKey());
               }

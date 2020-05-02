@@ -63,6 +63,7 @@ ArrayList<StudentAttendanceModel> list;
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list=new ArrayList<>();
                 for(DataSnapshot temp:dataSnapshot.getChildren()){
                     list.add(temp.getValue(StudentAttendanceModel.class));
                 }
