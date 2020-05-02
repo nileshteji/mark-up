@@ -6,6 +6,11 @@ public class Details {
     float Long;
     String time;
 
+
+
+    public Details(){
+
+}
     public Details(float toString, float toString1, float toString2, String toString3) {
         Alt=toString;
         Lat=toString1;

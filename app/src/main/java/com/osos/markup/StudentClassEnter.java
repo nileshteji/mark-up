@@ -40,6 +40,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.osos.markup.model.Details;
 import com.osos.markup.model.StudentAttendanceModel;
 
 import java.text.SimpleDateFormat;
@@ -56,7 +57,9 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
     TextView username;
     ProgressBar progressBar;
     EditText teacherNumber,Name,Subject,RollNumber,Batch;
-    DatabaseReference databaseReference,databaseReference1;
+    DatabaseReference databaseReference,databaseReference1,databaseReference2;
+    Details model;
+    boolean flag;
 
 
 
@@ -71,7 +74,6 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
         mapFragment.getMapAsync(this);
         MarkAttendance=findViewById(R.id.button2);
         databaseReference= FirebaseDatabase.getInstance().getReference("/Data/User");
-
         username=findViewById(R.id.username);
         progressBar=findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -80,6 +82,7 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
         Subject=findViewById(R.id.Subject);
         Batch=findViewById(R.id.batch);
         RollNumber=findViewById(R.id.roll);
+
         @SuppressLint("WrongConstant") final SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
         username.setText(sharedPreferences.getString("Username","null"));
         databaseReference1=FirebaseDatabase.getInstance().getReference("/Data/User/"+sharedPreferences.getString("Username","null"));
@@ -105,13 +108,14 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
                     databaseReference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.hasChild("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+
+                            if(dataSnapshot.hasChild(teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+
                                     Subject.getText().toString().toLowerCase())){
 
+                                databaseReference2=databaseReference.child("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+ Subject.getText().toString().toLowerCase()+"/Details");
+
+
                                 //TODO to create the constraint for time and location of the class
-                                if(true) {
-
-
+                                if(checkTime()){
                                     databaseReference.child("/" + teacherNumber.getText().toString() + "/Attendance/" + Batch.getText().toString().toUpperCase() + "/" + Date.getText().toString() + "/" + Subject.getText().toString().toLowerCase() + "/Attendance").
                                             child(sharedPreferences.getString("Username","null")).setValue(RollNumber.getText().toString()+" "+Name.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -185,6 +189,42 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
 
 
     }
+
+
+    public boolean checkTime(){
+       final String TAG="tag";
+       databaseReference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Details model=dataSnapshot.getValue(Details.class);
+                Log.d(TAG, "onDataChange: "+model.getTime());
+                String time=model.getTime();
+                String[] array=new String[2];
+                String currentTime=new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
+                String[] timeArray=new String[2];
+                timeArray=time.split(":");
+                String[] currentTimeArray=new String[2];
+                currentTimeArray=currentTime.split(":");
+                if(Integer.valueOf(currentTimeArray[1])<Integer.valueOf(timeArray[1]+15) && Integer.valueOf(timeArray[0])==Integer.valueOf(currentTimeArray[0])){
+                    flag=true;
+                }
+                else{
+                    flag=false;
+                }
+//
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return flag;
+    }
+
+
 
 
     @Override
