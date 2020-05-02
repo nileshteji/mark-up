@@ -40,6 +40,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.osos.markup.model.Details;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ClassEnter extends FragmentActivity implements OnMapReadyCallback, LocationListener {
@@ -102,7 +104,8 @@ public class ClassEnter extends FragmentActivity implements OnMapReadyCallback, 
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
 
-                                date.setText(dayOfMonth + "-" +(monthOfYear + 1) + "-" + year);
+
+                                    date.setText((checkDigit(dayOfMonth )+ "-" +(monthOfYear + 1) + "-" + year));
 
                             }
                         }, mYear, mMonth, mDay);
@@ -204,6 +207,11 @@ Add.setOnClickListener(new View.OnClickListener(){
 
 
 
+    }
+
+    public String checkDigit(int number)
+    {
+        return number<=9?"0"+number:String.valueOf(number);
     }
 
 

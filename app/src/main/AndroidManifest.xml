@@ -17,7 +17,8 @@
         android:roundIcon="@drawable/markuplogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AttendanceShown"></activity>
+        <activity android:name=".TeacherAttendanceShow"></activity>
+        <activity android:name=".AttendanceShown" />
         <activity android:name=".StudentClass1" />
         <activity android:name=".SubjectActivity" />
         <!--

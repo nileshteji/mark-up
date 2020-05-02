@@ -38,9 +38,15 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectH
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SubjectAdapter.SubjectHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SubjectAdapter.SubjectHolder holder, final int position) {
 
         holder.obj.setText(arrayList.get(position));
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subjectActivity.onClick(arrayList.get(position));
+            }
+        });
 
     }
 

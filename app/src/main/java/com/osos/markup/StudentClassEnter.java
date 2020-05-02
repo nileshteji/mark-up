@@ -114,7 +114,8 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
                                 databaseReference2=databaseReference.child("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+ Subject.getText().toString().toLowerCase()+"/Details");
 
 
-                                //TODO to create the constraint for time and location of the class
+                                //TODO Time Constraint is Done
+                                //TODO LAt and lang constraint need to be done along with altitude
                                 if(checkTime()){
                                     databaseReference.child("/" + teacherNumber.getText().toString() + "/Attendance/" + Batch.getText().toString().toUpperCase() + "/" + Date.getText().toString() + "/" + Subject.getText().toString().toLowerCase() + "/Attendance").
                                             child(sharedPreferences.getString("Username","null")).setValue(RollNumber.getText().toString()+" "+Name.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {

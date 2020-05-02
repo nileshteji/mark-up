@@ -104,5 +104,18 @@ public class SubjectActivity extends AppCompatActivity {
 
 
 
+
+    }
+
+    public void onClick(String a){
+
+        Intent intent=new Intent(SubjectActivity.this,TeacherAttendanceShow.class);
+        intent.putExtra("batch",batch);
+        intent.putExtra("date",date);
+        intent.putExtra("subject",a);
+        startActivity(intent);
+
+
+
     }
 }
