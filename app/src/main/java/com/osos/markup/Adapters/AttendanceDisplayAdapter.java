@@ -47,7 +47,7 @@ public class AttendanceDisplayAdapter extends RecyclerView.Adapter<AttendanceDis
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     class Holder extends RecyclerView.ViewHolder{
@@ -58,7 +58,7 @@ public class AttendanceDisplayAdapter extends RecyclerView.Adapter<AttendanceDis
             date=itemView.findViewById(R.id.date);
             subject=itemView.findViewById(R.id.textView11);
             TeacherUserName=itemView.findViewById(R.id.textView10);
-            time=itemView.findViewById(R.id.textView6);
+            time=itemView.findViewById(R.id.time);
             Name=itemView.findViewById(R.id.textView8);
             RollNumber=itemView.findViewById(R.id.textView9);
         }

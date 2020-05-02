@@ -40,7 +40,7 @@ ArrayList<StudentAttendanceModel> list;
         toolbar=findViewById(R.id.toolbar2);
         recyclerView=findViewById(R.id.recyclerView);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Classes");
+
         toolbar.setTitleMarginStart(50);
         progressBar=findViewById(R.id.progressBar3);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
@@ -50,11 +50,13 @@ ArrayList<StudentAttendanceModel> list;
                AttendanceShown.super.onBackPressed();
             }
         });
+        list=new ArrayList<>();
         toolbar.setTitleTextColor(Color.WHITE);
         progressBar.setVisibility(View.VISIBLE);
         a=getIntent().getStringExtra("subject");
+        getSupportActionBar().setTitle(a);
         @SuppressLint("WrongConstant") SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
-        mDatabaseReference= FirebaseDatabase.getInstance().getReference("/Data/User/"+sharedPreferences.getString("Username","null")+"/Attendance/"+a);
+        mDatabaseReference= FirebaseDatabase.getInstance().getReference("/Data/User/"+sharedPreferences.getString("Username","null")+"/Attendance/"+a.toLowerCase());
 
 
 

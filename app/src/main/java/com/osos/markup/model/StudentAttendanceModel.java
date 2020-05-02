@@ -18,6 +18,10 @@ public class StudentAttendanceModel {
         this.date = date;
     }
 
+    public StudentAttendanceModel(){
+
+    }
+
     public StudentAttendanceModel(String className, String time, String subject, String teacherNumber, String name, String rollNumber, String date) {
         this.className = className;
         Time = time;
