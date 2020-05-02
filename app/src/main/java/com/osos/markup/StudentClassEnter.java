@@ -29,6 +29,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -94,7 +96,19 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if(dataSnapshot.hasChild("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+Subject.getText().toString().toLowerCase())){
-                                Toast.makeText(StudentClassEnter.this, "HI Welcome", Toast.LENGTH_SHORT).show();
+                                 databaseReference.child("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+Subject.getText().toString().toLowerCase()+"/Attendance").
+                                         child(RollNumber.getText().toString()).setValue(Name.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                     @Override
+                                     public void onComplete(@NonNull Task<Void> task) {
+                                         if(task.isSuccessful()){
+                                             Toast.makeText(StudentClassEnter.this, "Attendance Added ", Toast.LENGTH_SHORT).show();
+                                         }
+                                         else{
+                                             Toast.makeText(StudentClassEnter.this, "Attendance not marked...Please try again", Toast.LENGTH_SHORT).show();
+                                         }
+                                     }
+                                 });
+
                             }
                             else{
                                 Toast.makeText(StudentClassEnter.this, "No Class Details match...", Toast.LENGTH_SHORT).show();
@@ -110,6 +124,34 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
                 else{
                     Toast.makeText(StudentClassEnter.this, "Please Fill the Details", Toast.LENGTH_SHORT).show();
                 }
+
+
+//TODO this is code is written for the fetching the data of the same
+
+//
+//           databaseReference.child("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+Subject.getText().toString().toLowerCase()+"/Attendance").
+//                        addValueEventListener(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
+//                                    Log.d("Roll Number",dataSnapshot1.get);
+//                                    Log.d("Name", (String) String.valueOf(dataSnapshot1.getValue()));
+//                                }
+//
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                            }
+//                        });
+
+
+
+
+
+
+
             }
         });
 
