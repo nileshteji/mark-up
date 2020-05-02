@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -116,14 +117,11 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                progressBar.setVisibility(View.INVISIBLE);
-                                                Toast.makeText(StudentClassEnter.this, "Attendance Added ", Toast.LENGTH_SHORT).show();
-                                                new Handler().postDelayed(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        startActivity(new Intent(StudentClassEnter.this,Student.class));
-                                                    }
-                                                },1000);
+
+                                             studentAttendance studentAttendance=new studentAttendance();
+                                             studentAttendance.execute();
+
+
                                             } else {
                                                 progressBar.setVisibility(View.INVISIBLE);
                                                 Toast.makeText(StudentClassEnter.this, "Attendance not marked...Please try again", Toast.LENGTH_SHORT).show();
@@ -131,8 +129,8 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
                                         }
                                     });
 
-//TODO this will be pushed to the student json file
-//                                    databaseReference1.child("Attendance").child(Date.getText().toString()).child(Batch.getText().toString().toUpperCase()).
+                                    //TODO this will be pushed to the student json file
+
 
 
 
@@ -155,6 +153,8 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
                     });
 
 
+                    //TODO this is code is written for the fetching the data of the same
+
 
 
 
@@ -166,7 +166,6 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
                 }
 
 
-//TODO this is code is written for the fetching the data of the same
 
 //
 //           databaseReference.child("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+Subject.getText().toString().toLowerCase()+"/Attendance").
@@ -256,6 +255,24 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
 
     }
 
+class studentAttendance extends AsyncTask<Void,Void,Void>{
 
+    @SuppressLint("WrongThread")
+    @Override
+    protected Void doInBackground(Void... voids) {
+        //TODO this is code is written for the fetching the data of the same
+        databaseReference1.child("Attendance").push().setValue(new StudentAttendanceModel(Batch.getText().toString(), Time.getText().toString(), Subject.getText().toString(), teacherNumber.getText().toString(), Name.getText().toString(), RollNumber.getText().toString()));
+
+
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        Toast.makeText(StudentClassEnter.this, "Attendance Marked", Toast.LENGTH_SHORT).show();
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+}
 
 }
