@@ -261,7 +261,7 @@ class studentAttendance extends AsyncTask<Void,Void,Void>{
     @Override
     protected Void doInBackground(Void... voids) {
         //TODO this is code is written for the fetching the data of the same
-        databaseReference1.child("Attendance").push().setValue(new StudentAttendanceModel(Batch.getText().toString(), Time.getText().toString(), Subject.getText().toString(), teacherNumber.getText().toString(), Name.getText().toString(), RollNumber.getText().toString()));
+        databaseReference1.child("/Attendance").child(Subject.getText().toString()).child(Date.getText().toString()+" "+Time.getText().toString()).setValue(new StudentAttendanceModel(Batch.getText().toString(), Time.getText().toString(), Subject.getText().toString(), teacherNumber.getText().toString(), Name.getText().toString(), RollNumber.getText().toString()));
 
 
         return null;
