@@ -128,35 +128,7 @@ currentLocation.setOnClickListener(new View.OnClickListener() {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if(dataSnapshot.hasChild(teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+
                                     Subject.getText().toString().toLowerCase())){
-                                databaseReference2=FirebaseDatabase.getInstance().getReference("/Data/User").child("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+ Subject.getText().toString().toLowerCase()+"/Details");
-                                if(checkTime() && checkLocation())
-                                {
-                                    databaseReference.child("/" + teacherNumber.getText().toString() + "/Attendance/" + Batch.getText().toString().toUpperCase() + "/" + Date.getText().toString() + "/" + Subject.getText().toString().toLowerCase() + "/Attendance").
-                                            child(sharedPreferences.getString("Username","null")).setValue(RollNumber.getText().toString()+" "+Name.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                studentAttendance studentAttendance=new studentAttendance();
-                                             studentAttendance.execute();
-                                            }
-
-                                            else {
-                                                progressBar.setVisibility(View.INVISIBLE);
-                                                Toast.makeText(StudentClassEnter.this, "Attendance not marked...Please try again", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-
-
-
-
-
-
-                                }
-                                else{
-                                    progressBar.setVisibility(View.INVISIBLE);
-                                    Toast.makeText(StudentClassEnter.this, "Cannot Enter Class", Toast.LENGTH_SHORT).show();
-                                }
+                                process();
                             }
                             else{
                                 progressBar.setVisibility(View.INVISIBLE);
@@ -203,6 +175,39 @@ currentLocation.setOnClickListener(new View.OnClickListener() {
 
 
 
+    }
+
+    public void process(){
+        @SuppressLint("WrongConstant") SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
+        databaseReference2=FirebaseDatabase.getInstance().getReference("/Data/User").child("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+ Subject.getText().toString().toLowerCase()+"/Details");
+        if(checkTime() && checkLocation())
+        {
+            databaseReference.child("/" + teacherNumber.getText().toString() + "/Attendance/" + Batch.getText().toString().toUpperCase() + "/" + Date.getText().toString() + "/" + Subject.getText().toString().toLowerCase() + "/Attendance").
+                    child(sharedPreferences.getString("Username","null")).setValue(RollNumber.getText().toString()+" "+Name.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        studentAttendance studentAttendance=new studentAttendance();
+                        studentAttendance.execute();
+                    }
+
+                    else {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(StudentClassEnter.this, "Attendance not marked...Please try again", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+
+
+
+
+
+        }
+        else{
+            progressBar.setVisibility(View.INVISIBLE);
+            Toast.makeText(StudentClassEnter.this, "Please Try again!cannot enter class", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
