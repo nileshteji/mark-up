@@ -55,7 +55,8 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
     EditText teacherNumber,Name,Subject,RollNumber,Batch;
     DatabaseReference databaseReference,databaseReference1,databaseReference2;
     String time;
-    boolean flag=true;
+    boolean flagTime;
+
     boolean locationFlag=true;
     double latTemp;
     Button Location;
@@ -118,23 +119,18 @@ currentLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-
                 if(teacherNumber.getText().toString().trim().length()>0 && Batch.getText().toString().trim().length()>0 && progressBar.getVisibility()==View.INVISIBLE &&
                         Name.getText().toString().trim().length()>0 && Subject.getText().toString().trim().length()>0 && RollNumber.getText().toString().trim().length()>0){
                     progressBar.setVisibility(View.VISIBLE);
+
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if(dataSnapshot.hasChild(teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+
                                     Subject.getText().toString().toLowerCase())){
-
-                                databaseReference2=databaseReference.child("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+ Subject.getText().toString().toLowerCase()+"/Details");
-
-
-                                //TODO Time Constraint is Done
-                                //TODO LAt and lang constraint need to be done along with altitude
-                                if(checkLocation()&& checkTime()){
+                                databaseReference2=FirebaseDatabase.getInstance().getReference("/Data/User").child("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+ Subject.getText().toString().toLowerCase()+"/Details");
+                                if(checkTime() && checkLocation())
+                                {
                                     databaseReference.child("/" + teacherNumber.getText().toString() + "/Attendance/" + Batch.getText().toString().toUpperCase() + "/" + Date.getText().toString() + "/" + Subject.getText().toString().toLowerCase() + "/Attendance").
                                             child(sharedPreferences.getString("Username","null")).setValue(RollNumber.getText().toString()+" "+Name.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -213,69 +209,74 @@ currentLocation.setOnClickListener(new View.OnClickListener() {
     public boolean checkTime(){
        final String TAG="tag";
 
-       databaseReference2.addListenerForSingleValueEvent(new ValueEventListener()
-           {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Details model=dataSnapshot.getValue(Details.class);
-//                Log.d(TAG, "onDataChange: "+model.getTime());
-                time=model.getTime();
-                String currentTime=new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
-                String[] timeArray=new String[2];
-                timeArray=time.split(":");
-                String[] currentTimeArray=new String[2];
-                currentTimeArray=currentTime.split(":");
-//                Log.d("TAG",String.valueOf(Integer.valueOf(timeArray[1])+15));
-//                Log.d(TAG, "onDataChange: "+currentTimeArray[1]);
-                int a =Integer.valueOf(currentTimeArray[1]);
-                int b=Integer.valueOf(timeArray[1])+15;
-                if(a<=b){
-                    flag =true;
+        databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            Details model=dataSnapshot.getValue(Details.class);
+            time=model.getTime();
+            String currentTime=new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
+            String[] timeArray=new String[2];
+            timeArray=time.split(":");
+            String[] currentTimeArray=new String[2];
+            currentTimeArray=currentTime.split(":");
+            int a =Integer.valueOf(currentTimeArray[1]);
+            int e=Integer.valueOf(timeArray[1]);
+            int b=Integer.valueOf(timeArray[1])+15;
+            int c=Integer.valueOf(timeArray[0]);
+            int d=Integer.valueOf(currentTimeArray[0]);
+            Log.d(TAG, "onDataChange: "+e+" "+a+" "+b);
+            Log.d(TAG, "onDataChange: "+c+d);
+            if(e<=a && a<=b){
+                if(c==d) {
+                    flagTime = true;
                 }
                 else{
-                    flag =false;
+                    flagTime =false;
                 }
-
-
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            else{
+                flagTime =false;
             }
-        });
+        }
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-   return flag;
+        }
+    });
+
+
+
+
+      return flagTime;
     }
 
 
 public boolean checkLocation(){
 final String TAG="LOcation";
 
-      ValueEventListener valueEventListener=new ValueEventListener() {
-          @Override
-          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-              Details details=dataSnapshot.getValue(Details.class);
-              Log.d(TAG, "onDataChange: "+Math.round(distance(details.getLat(),details.getLong(),lat,lang,'K')*1000));
-            if(Math.round(distance(details.getLat(),details.getLong(),lat,lang,'K'))*1000<=6){
-       locationFlag=true;
-              }
-            else{
-             locationFlag=false;
-            }
 
+  databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+          Details details=dataSnapshot.getValue(Details.class);
+          Log.d(TAG, "onDataChange: "+details.getLat() + details.getLong() +lat +lang);
+          Log.d(TAG, "onDataChange: "+distance(details.getLat(),details.getLong(),lat,lang,'K')*1000);
+
+          if((distance(details.getLat(),details.getLong(),lat,lang,'K'))*1000<=1.00){
+              locationFlag=true;
           }
-
-          @Override
-          public void onCancelled(@NonNull DatabaseError databaseError) {
-
+          else{
+              locationFlag=false;
           }
-      };
+      }
 
-      databaseReference2.addListenerForSingleValueEvent(valueEventListener);
-      databaseReference2.removeEventListener(valueEventListener);
-      return  locationFlag;
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+
+      }
+  });
+
+    return  true;
 }
 
     private double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
@@ -292,16 +293,12 @@ final String TAG="LOcation";
         return (dist);
     }
 
-    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-    /*::  This function converts decimal degrees to radians             :*/
-    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
     private double deg2rad(double deg) {
         return (deg * Math.PI / 180.0);
     }
 
-    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-    /*::  This function converts radians to decimal degrees             :*/
-    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
     private double rad2deg(double rad) {
         return (rad * 180.0 / Math.PI);
     }
