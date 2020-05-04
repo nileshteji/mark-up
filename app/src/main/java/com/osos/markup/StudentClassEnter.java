@@ -259,7 +259,7 @@ final String TAG="LOcation";
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
           Details details=dataSnapshot.getValue(Details.class);
-          Log.d(TAG, "onDataChange: "+details.getLat() + details.getLong() +lat +lang);
+          Log.d(TAG, "onDataChange: "+details.getLat() + " "+details.getLong()+" "+lat +" "+lang);
           Log.d(TAG, "onDataChange: "+distance(details.getLat(),details.getLong(),lat,lang,'K')*1000);
 
           if((distance(details.getLat(),details.getLong(),lat,lang,'K'))*1000<=1.00){
