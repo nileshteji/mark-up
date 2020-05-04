@@ -32,6 +32,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,6 +41,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.osos.markup.model.Details;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -57,7 +59,11 @@ public class ClassEnter extends FragmentActivity implements OnMapReadyCallback, 
    TextView username;
    TextView time;
    TextView date;
+    double alt1;
+    double lang1;
+    double lat1;
    DatabaseReference dbRefernce;
+   Marker marker;
 
 
 
@@ -105,7 +111,7 @@ public class ClassEnter extends FragmentActivity implements OnMapReadyCallback, 
                                                   int monthOfYear, int dayOfMonth) {
 
 
-                                    date.setText((checkDigit(dayOfMonth )+ "-" +(monthOfYear + 1) + "-" + year));
+                                    date.setText((checkDigit(dayOfMonth )+ "-" +checkDigit(monthOfYear + 1) + "-" + year));
 
                             }
                         }, mYear, mMonth, mDay);
@@ -128,7 +134,7 @@ public class ClassEnter extends FragmentActivity implements OnMapReadyCallback, 
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
 
-                                time.setText(hourOfDay + ":" + minute);
+                                time.setText(checkDigit(hourOfDay) + ":" + checkDigit(minute));
                             }
                         }, mHour, mMinute, false);
                 timePickerDialog.show();
@@ -179,8 +185,8 @@ Add.setOnClickListener(new View.OnClickListener(){
 
             dbRefernce.child(username.getText().toString())
                     .child("Attendance").child(ClassName.getText().toString().toUpperCase()).child(date.getText().toString())
-                    .child(CourseCode.getText().toString().toLowerCase()).child("Details").setValue(new Details(Float.valueOf(alt.getText().toString()),
-                    Float.valueOf(lat.getText().toString()),Float.valueOf(lang.getText().toString()) ,time.getText().toString())).
+                    .child(CourseCode.getText().toString().toLowerCase()).child("Details").setValue(new Details(alt1,
+                    lat1,lang1 ,time.getText().toString())).
                     addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -238,6 +244,11 @@ Add.setOnClickListener(new View.OnClickListener(){
 }
     @Override
     public void onLocationChanged(Location location) {
+        lat1=location.getLatitude();
+        lang1=location.getLongitude();
+        alt1=location.getAltitude();
+        Log.d("TAG", "onLocationChanged: "+lat1);
+
         lat=findViewById(R.id.lat);
         lang=findViewById(R.id.lang);
         alt=findViewById(R.id.alt);
@@ -246,8 +257,12 @@ Add.setOnClickListener(new View.OnClickListener(){
       lang.setText(String.valueOf(location.getLongitude()));
       alt.setText(String.valueOf(location.getAltitude()));
       LatLng current=new LatLng(location.getLatitude(),location.getLongitude());
-      mMap.addMarker(new MarkerOptions().position(current).title("Current Locatioin"));
+      mMap.addMarker(new MarkerOptions().position(current).title("Current Location"));
+      marker=mMap.addMarker(new MarkerOptions().position(current).title("Current Location"));
       mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current,16.0f));
+
+
+
 
     }
 

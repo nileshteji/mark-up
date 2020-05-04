@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -15,15 +14,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,7 +30,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,13 +48,18 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
     Button currentLocation;
     Button MarkAttendance;
     TextView Date;
+  double lat,lang,alt;
     TextView Time;
     TextView username;
     ProgressBar progressBar;
     EditText teacherNumber,Name,Subject,RollNumber,Batch;
     DatabaseReference databaseReference,databaseReference1,databaseReference2;
-    Details model;
-    boolean flag;
+    String time;
+    boolean flag=true;
+    boolean locationFlag=true;
+    double latTemp;
+    Button Location;
+    Location currentCoordinates;
 
 
 
@@ -81,6 +81,7 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
         Name=findViewById(R.id.StudentNAme);
         Subject=findViewById(R.id.Subject);
         Batch=findViewById(R.id.batch);
+        Location=findViewById(R.id.currentLocarton1);
         RollNumber=findViewById(R.id.roll);
 
         @SuppressLint("WrongConstant") final SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
@@ -93,7 +94,24 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
         Date.setText(new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime()));
         Time.setText(new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime()));
 
+currentLocation.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if (ActivityCompat.checkSelfPermission(StudentClassEnter.this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(StudentClassEnter.this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
+            ActivityCompat.requestPermissions(StudentClassEnter.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        }
+        else {
+            Log.e("Enabled","Hi i am in else");
+            progressBar.setVisibility(View.VISIBLE);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,StudentClassEnter.this);
+
+        }
+    }
+});
 
 
         MarkAttendance.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +123,7 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
                 if(teacherNumber.getText().toString().trim().length()>0 && Batch.getText().toString().trim().length()>0 && progressBar.getVisibility()==View.INVISIBLE &&
                         Name.getText().toString().trim().length()>0 && Subject.getText().toString().trim().length()>0 && RollNumber.getText().toString().trim().length()>0){
                     progressBar.setVisibility(View.VISIBLE);
-                    databaseReference.addValueEventListener(new ValueEventListener() {
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if(dataSnapshot.hasChild(teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+
@@ -116,7 +134,7 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
 
                                 //TODO Time Constraint is Done
                                 //TODO LAt and lang constraint need to be done along with altitude
-                                if(checkTime()){
+                                if(checkLocation()&& checkTime()){
                                     databaseReference.child("/" + teacherNumber.getText().toString() + "/Attendance/" + Batch.getText().toString().toUpperCase() + "/" + Date.getText().toString() + "/" + Subject.getText().toString().toLowerCase() + "/Attendance").
                                             child(sharedPreferences.getString("Username","null")).setValue(RollNumber.getText().toString()+" "+Name.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -194,25 +212,30 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
 
     public boolean checkTime(){
        final String TAG="tag";
-       databaseReference2.addValueEventListener(new ValueEventListener() {
+
+       databaseReference2.addListenerForSingleValueEvent(new ValueEventListener()
+           {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Details model=dataSnapshot.getValue(Details.class);
-                Log.d(TAG, "onDataChange: "+model.getTime());
-                String time=model.getTime();
-                String[] array=new String[2];
+//                Log.d(TAG, "onDataChange: "+model.getTime());
+                time=model.getTime();
                 String currentTime=new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
                 String[] timeArray=new String[2];
                 timeArray=time.split(":");
                 String[] currentTimeArray=new String[2];
                 currentTimeArray=currentTime.split(":");
-                if(Integer.valueOf(currentTimeArray[1])<Integer.valueOf(timeArray[1]+15) && Integer.valueOf(timeArray[0])==Integer.valueOf(currentTimeArray[0])){
-                    flag=true;
+//                Log.d("TAG",String.valueOf(Integer.valueOf(timeArray[1])+15));
+//                Log.d(TAG, "onDataChange: "+currentTimeArray[1]);
+                int a =Integer.valueOf(currentTimeArray[1]);
+                int b=Integer.valueOf(timeArray[1])+15;
+                if(a<=b){
+                    flag =true;
                 }
                 else{
-                    flag=false;
+                    flag =false;
                 }
-//
 
 
             }
@@ -222,14 +245,78 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
 
             }
         });
-        return flag;
+
+   return flag;
     }
+
+
+public boolean checkLocation(){
+final String TAG="LOcation";
+
+      ValueEventListener valueEventListener=new ValueEventListener() {
+          @Override
+          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+              Details details=dataSnapshot.getValue(Details.class);
+              Log.d(TAG, "onDataChange: "+Math.round(distance(details.getLat(),details.getLong(),lat,lang,'K')*1000));
+            if(Math.round(distance(details.getLat(),details.getLong(),lat,lang,'K'))*1000<=6){
+       locationFlag=true;
+              }
+            else{
+             locationFlag=false;
+            }
+
+          }
+
+          @Override
+          public void onCancelled(@NonNull DatabaseError databaseError) {
+
+          }
+      };
+
+      databaseReference2.addListenerForSingleValueEvent(valueEventListener);
+      databaseReference2.removeEventListener(valueEventListener);
+      return  locationFlag;
+}
+
+    private double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        if (unit == 'K') {
+            dist = dist * 1.609344;
+        } else if (unit == 'N') {
+            dist = dist * 0.8684;
+        }
+        return (dist);
+    }
+
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    /*::  This function converts decimal degrees to radians             :*/
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    /*::  This function converts radians to decimal degrees             :*/
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
+    }
+
 
 
 
 
     @Override
     public void onLocationChanged(Location location) {
+      String TAG= "Final";
+        lang=location.getLongitude();
+        lat=  location.getLatitude();
+        alt= location.getAltitude();
+        Log.d(TAG, "onLocationChanged: "+lang +" "+lat);
         LatLng current=new LatLng(location.getLatitude(),location.getLongitude());
         mMap.addMarker(new MarkerOptions().position(current).title("Current Locatioin"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current,16.0f));
@@ -282,7 +369,7 @@ class studentAttendance extends AsyncTask<Void,Void,Void>{
     @Override
     protected Void doInBackground(Void... voids) {
         //TODO this is code is written for the fetching the data of the same
-        databaseReference1.child("/Attendance").child(Subject.getText().toString()).child(Date.getText().toString()+" "+getSharedPreferences("Username",MODE_APPEND).getString("Username","null")).setValue(new StudentAttendanceModel(Batch.getText().toString(), Time.getText().toString(), Subject.getText().toString(), teacherNumber.getText().toString(), Name.getText().toString(), RollNumber.getText().toString(),Date.getText().toString()));
+        databaseReference1.child("/Attendance").child(Subject.getText().toString().toLowerCase()).child(Date.getText().toString()+" "+getSharedPreferences("Username",MODE_APPEND).getString("Username","null")).setValue(new StudentAttendanceModel(Batch.getText().toString(), Time.getText().toString(), Subject.getText().toString(), teacherNumber.getText().toString(), Name.getText().toString(), RollNumber.getText().toString(),Date.getText().toString()));
 
 
         return null;

@@ -62,7 +62,7 @@ public class TeacherAttendanceShow extends AppCompatActivity {
         //mDatabase= FirebaseDatabase.getInstance().getReference("/Data/User/9356364121/Attendance/OSSB2/02-05-2020/microprocessor/Attendance");
         @SuppressLint("WrongConstant") SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
         String userTemp=sharedPreferences.getString("Username","null");
-      
+
 
         databaseReference = FirebaseDatabase.getInstance().getReference("/Data/User/" + userTemp + "/Attendance/" + batch + "/" + date + "/" + Subject+"/Attendance");
         databaseReference.addValueEventListener(new ValueEventListener() {
