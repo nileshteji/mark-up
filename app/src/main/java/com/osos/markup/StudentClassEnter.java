@@ -56,8 +56,9 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
     DatabaseReference databaseReference,databaseReference1,databaseReference2;
     String time;
     boolean flagTime;
+    boolean locationFlag;
 
-    boolean locationFlag=true;
+
     double latTemp;
     Button Location;
     Location currentCoordinates;
@@ -261,6 +262,7 @@ public boolean checkLocation(){
 final String TAG="LOcation";
 
 
+
   databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -274,11 +276,12 @@ final String TAG="LOcation";
           float locationFloat =location.distanceTo(currentCoordinates);
           float constraint=7f;
        int   a =Float.compare(locationFloat,constraint);
+
           if(a<0){
-              locationFlag=true;
+              locationFlag =true;
           }
           else{
-              locationFlag=false;
+              locationFlag =false;
           }
 
       }
@@ -289,7 +292,8 @@ final String TAG="LOcation";
       }
   });
 
-return locationFlag;
+
+    return locationFlag;
 
 }
 
