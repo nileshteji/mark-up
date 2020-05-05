@@ -61,6 +61,7 @@ public class StudentClassEnter extends FragmentActivity implements OnMapReadyCal
     double latTemp;
     Button Location;
     Location currentCoordinates;
+    int a;
 
 
 
@@ -180,27 +181,27 @@ currentLocation.setOnClickListener(new View.OnClickListener() {
     public void process(){
         @SuppressLint("WrongConstant") SharedPreferences sharedPreferences=getSharedPreferences("Username",MODE_APPEND);
         databaseReference2=FirebaseDatabase.getInstance().getReference("/Data/User").child("/"+teacherNumber.getText().toString()+"/Attendance/"+Batch.getText().toString().toUpperCase()+"/"+Date.getText().toString()+"/"+ Subject.getText().toString().toLowerCase()+"/Details");
-        if(checkTime() && checkLocation())
+        if(checkTime())
         {
-            databaseReference.child("/" + teacherNumber.getText().toString() + "/Attendance/" + Batch.getText().toString().toUpperCase() + "/" + Date.getText().toString() + "/" + Subject.getText().toString().toLowerCase() + "/Attendance").
-                    child(sharedPreferences.getString("Username","null")).setValue(RollNumber.getText().toString()+" "+Name.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        studentAttendance studentAttendance=new studentAttendance();
-                        studentAttendance.execute();
+            if(checkLocation()) {
+                databaseReference.child("/" + teacherNumber.getText().toString() + "/Attendance/" + Batch.getText().toString().toUpperCase() + "/" + Date.getText().toString() + "/" + Subject.getText().toString().toLowerCase() + "/Attendance").
+                        child(sharedPreferences.getString("Username", "null")).setValue(RollNumber.getText().toString() + " " + Name.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            studentAttendance studentAttendance = new studentAttendance();
+                            studentAttendance.execute();
+                        } else {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            Toast.makeText(StudentClassEnter.this, "Attendance not marked...Please try again", Toast.LENGTH_SHORT).show();
+                        }
                     }
-
-                    else {
-                        progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(StudentClassEnter.this, "Attendance not marked...Please try again", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+                });
 
 
-
-
+            }else{
+                Toast.makeText(this, "Please Try again ! Cannot Enter Class", Toast.LENGTH_SHORT).show();
+            }
 
 
         }
@@ -266,13 +267,20 @@ final String TAG="LOcation";
           Details details=dataSnapshot.getValue(Details.class);
           Log.d(TAG, "onDataChange: "+details.getLat() + " "+details.getLong()+" "+lat +" "+lang);
           Log.d(TAG, "onDataChange: "+distance(details.getLat(),details.getLong(),lat,lang,'K')*1000);
-
-          if((distance(details.getLat(),details.getLong(),lat,lang,'K'))*1000<=1.00){
+          Location location=new Location(LocationManager.GPS_PROVIDER);
+          location.setLatitude(details.getLat());
+          location.setLongitude(details.getLong());
+          Log.d(TAG,"HI Duiisat"+location.distanceTo(currentCoordinates));
+          float locationFloat =location.distanceTo(currentCoordinates);
+          float constraint=7f;
+       int   a =Float.compare(locationFloat,constraint);
+          if(a<0){
               locationFlag=true;
           }
           else{
               locationFlag=false;
           }
+
       }
 
       @Override
@@ -281,7 +289,8 @@ final String TAG="LOcation";
       }
   });
 
-    return  true;
+return locationFlag;
+
 }
 
     private double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
@@ -318,6 +327,7 @@ final String TAG="LOcation";
         lang=location.getLongitude();
         lat=  location.getLatitude();
         alt= location.getAltitude();
+        currentCoordinates=location;
         Log.d(TAG, "onLocationChanged: "+lang +" "+lat);
         LatLng current=new LatLng(location.getLatitude(),location.getLongitude());
         mMap.addMarker(new MarkerOptions().position(current).title("Current Locatioin"));
