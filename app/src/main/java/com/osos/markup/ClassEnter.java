@@ -162,21 +162,7 @@ public class ClassEnter extends FragmentActivity implements OnMapReadyCallback, 
                }
            }
        });
-//       datePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
-//           @Override
-//           public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-//               date.setText(dayOfMonth+"."+monthOfYear+"."+year);
-//               datePicker.setVisibility(View.INVISIBLE);
-//
-//           }
-//       });
-//
-//       date.setOnClickListener(new View.OnClickListener() {
-//           @Override
-//           public void onClick(View v) {
-//            datePicker.setVisibility(View.VISIBLE);
-//           }
-//       });
+
 Add.setOnClickListener(new View.OnClickListener(){
 
                @Override
