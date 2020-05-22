@@ -201,6 +201,7 @@ currentLocation.setOnClickListener(new View.OnClickListener() {
 
 
             }else{
+                progressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(this, "Please Try again ! Cannot Enter Class", Toast.LENGTH_SHORT).show();
             }
 
