@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:context=".ClassEnter" />
+        tools:context=".ui.ClassEnter" />
 
     <Button
         android:id="@+id/button2"

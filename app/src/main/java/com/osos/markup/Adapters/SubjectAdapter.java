@@ -1,7 +1,6 @@
 package com.osos.markup.Adapters;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.osos.markup.R;
-import com.osos.markup.SubjectActivity;
+import com.osos.markup.ui.SubjectActivity;
 
 import java.util.ArrayList;
 
@@ -21,10 +20,10 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectH
     ArrayList<String> arrayList;
     SubjectActivity subjectActivity;
 
-    public SubjectAdapter(Context c, ArrayList<String> arrayList,SubjectActivity subjectActivity) {
-      this.c=c;
-      this.arrayList=arrayList;
-      this.subjectActivity= subjectActivity;
+    public SubjectAdapter(Context c, ArrayList<String> arrayList, SubjectActivity subjectActivity) {
+        this.c = c;
+        this.arrayList = arrayList;
+        this.subjectActivity = subjectActivity;
 
     }
 
@@ -32,7 +31,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectH
     @NonNull
     @Override
     public SubjectAdapter.SubjectHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(c).inflate(R.layout.classadapter,parent,false);
+        View v = LayoutInflater.from(c).inflate(R.layout.classadapter, parent, false);
 
         return new SubjectHolder(v);
     }
@@ -55,13 +54,14 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectH
         return arrayList.size();
     }
 
-    class SubjectHolder extends RecyclerView.ViewHolder{
+    class SubjectHolder extends RecyclerView.ViewHolder {
         TextView obj;
         CardView card;
+
         public SubjectHolder(@NonNull View itemView) {
             super(itemView);
-            obj=itemView.findViewById(R.id.dateNAme);
-            card=itemView.findViewById(R.id.cardView);
+            obj = itemView.findViewById(R.id.dateNAme);
+            card = itemView.findViewById(R.id.cardView);
         }
     }
 }

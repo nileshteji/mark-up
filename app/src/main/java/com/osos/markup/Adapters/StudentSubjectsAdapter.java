@@ -11,7 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.osos.markup.R;
-import com.osos.markup.StudentClass1;
+import com.osos.markup.ui.StudentClass1;
 
 import java.util.ArrayList;
 
@@ -21,17 +21,17 @@ public class StudentSubjectsAdapter extends RecyclerView.Adapter<StudentSubjects
     ArrayList<String> list;
     Context c;
 
-    public StudentSubjectsAdapter(Context c,ArrayList<String> list,StudentClass1 studentClass1){
-        this.studentClass1=studentClass1;
-        this.list=list;
-        this.c=c;
+    public StudentSubjectsAdapter(Context c, ArrayList<String> list, StudentClass1 studentClass1) {
+        this.studentClass1 = studentClass1;
+        this.list = list;
+        this.c = c;
     }
 
 
     @NonNull
     @Override
     public StudentSubjectHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(c).inflate(R.layout.classadapter,parent,false);
+        View view = LayoutInflater.from(c).inflate(R.layout.classadapter, parent, false);
 
         return new StudentSubjectHolder(view);
     }
@@ -52,13 +52,14 @@ public class StudentSubjectsAdapter extends RecyclerView.Adapter<StudentSubjects
         return list.size();
     }
 
-    class StudentSubjectHolder extends RecyclerView.ViewHolder{
+    class StudentSubjectHolder extends RecyclerView.ViewHolder {
         TextView obj;
         CardView card;
+
         public StudentSubjectHolder(@NonNull View itemView) {
             super(itemView);
-            obj=itemView.findViewById(R.id.dateNAme);
-            card=itemView.findViewById(R.id.cardView);
+            obj = itemView.findViewById(R.id.dateNAme);
+            card = itemView.findViewById(R.id.cardView);
         }
     }
 }

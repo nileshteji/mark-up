@@ -9,29 +9,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.osos.markup.Attendance;
+import com.osos.markup.ui.Attendance;
 import com.osos.markup.R;
 
 import java.util.ArrayList;
 
 
-public class ClassAdapter extends  RecyclerView.Adapter<ClassAdapter.ClassHolder> {
+public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassHolder> {
     Context c;
     ArrayList<String> arrayList;
     Attendance boj;
 
 
-    public ClassAdapter(Context c, ArrayList<String> arrayList, Attendance obj){
-        this.c=c;
-        this.arrayList=arrayList;
-        boj=obj;
+    public ClassAdapter(Context c, ArrayList<String> arrayList, Attendance obj) {
+        this.c = c;
+        this.arrayList = arrayList;
+        boj = obj;
     }
 
     @NonNull
     @Override
     public ClassHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View view= LayoutInflater.from(c).inflate(R.layout.classadapter,parent,false);
-       return new ClassHolder(view) ;
+        View view = LayoutInflater.from(c).inflate(R.layout.classadapter, parent, false);
+        return new ClassHolder(view);
     }
 
     @Override
@@ -48,7 +48,6 @@ public class ClassAdapter extends  RecyclerView.Adapter<ClassAdapter.ClassHolder
         });
 
 
-
     }
 
     @Override
@@ -57,15 +56,15 @@ public class ClassAdapter extends  RecyclerView.Adapter<ClassAdapter.ClassHolder
     }
 
 
-
     class ClassHolder extends RecyclerView.ViewHolder {
 
         TextView obj;
+
         public ClassHolder(@NonNull View itemView) {
             super(itemView);
-            obj=itemView.findViewById(R.id.dateNAme);
+            obj = itemView.findViewById(R.id.dateNAme);
         }
-}
+    }
 
 
 }
