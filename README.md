@@ -6,14 +6,16 @@
 
 # Student
 
- ## 1.DashBoard
+
+## DashBoard
 <img src = "/Extras/studentHome.jpg" width="250" height="500"/>
- ## 2.Mark Attendance
+<br>
+## Mark Attendance
 In this Section the student mark there attendance on the basis of there location and time of the phone
 - Google Map API
 - Firebase Realtime DataBase.
 <img src = "/Extras/studentattend.jpg" width="250" height="500"/> 
-## 3. ViewAttendance
+## ViewAttendance
 This Section includesall the classes/meeting which are attended by the student.Also it tells at what time you entered the class and whose class it was.
 - RealTime DataBase
 - Live Data
@@ -21,7 +23,7 @@ This Section includesall the classes/meeting which are attended by the student.A
 <img src = "/Extras/student1.jpg" width="250" height="500"/> <img src = "/Extras/studentlist.jpg" width="250" height="500"/>  
 
 
-## Maintainers and Developers
+# Maintainers and Developers
  - [Nilesh Teji](https://github.com/nileshteji)
 
 
