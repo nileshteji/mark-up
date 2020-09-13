@@ -1,4 +1,4 @@
-# Jeewan:The Plasma Donation Application
+# MarkUp
 
 <a href="https://play.google.com/store/apps/details?id=com.osos.markup"><img alt="Get it on Google Play" height="80" src="/Extras/google-play-badge.png"></a>
 
