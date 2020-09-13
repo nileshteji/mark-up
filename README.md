@@ -5,6 +5,7 @@
 
 # Student
 
+
 ## Mark Attendance
 In this Section the student mark there attendance on the basis of there location and time of the phone
 - Google Map API
